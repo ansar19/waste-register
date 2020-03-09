@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h3>{{'Menu_Planning'|localize}}</h3>
-      <h4>{{info.bill.toFixed(2)}} {{'TON' | localize}}</h4>
+      <h5>{{info.bill.toFixed(2)}} {{'TON' | localize}}</h5>
     </div>
 
     <Loader v-if="loading"/>
@@ -18,8 +18,6 @@
           <strong>{{cat.title}}:</strong>
           {{cat.spend }} {{'TON' | localize}} {{'Of'|localize}} {{cat.limit }} {{'TON' | localize}}
         </p>
-
-
 
         <div class="progress" v-tooltip.noloc="cat.tooltip">
           <div 

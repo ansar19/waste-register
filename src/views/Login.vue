@@ -3,7 +3,7 @@
     <div class="main-content-container container-fluid px-4 my-auto h-100">
       <div class="row no-gutters h-100">
         <div class="col-lg-3 col-md-5 auth-form mx-auto my-auto">
-          <form class="card auth-card" @submit.prevent="submitHandler">
+          <form class="card" @submit.prevent="submitHandler">
             <div class="card-content">
               <span class="card-title">{{'CRM_Title'|localize}}</span>
               <div class="form-group">
@@ -36,10 +36,10 @@
                 </button>
               </div>
 
-              <p class="center">
+              <!-- <p class="center">
                 {{'NoAccount'|localize}}
                 <router-link to="/register">{{'Register'|localize}}</router-link>
-              </p>
+              </p> -->
             </div>
           </form>
         </div>
