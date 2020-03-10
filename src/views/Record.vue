@@ -59,11 +59,10 @@
       <div class="from-group">
         <!-- <div>Opened: <span :class="[opened ? 'text-success' : 'text-danger']">{{ opened }}</span></div> -->
         <div>📅 {{'Removal_Date'|localize}}: </div>
-        <!-- <span>{{ removalDate }}</span> -->
+        <span>{{ removalDate }}</span>
         <d-datepicker
             v-model="removalDate"
-            :language="ru"
-            typeable />
+            :language="ru" />
       </div>
 
       <!-- decimal number -->
@@ -125,7 +124,7 @@ import {en, ru} from 'vuejs-datepicker/dist/locale'
       transporter: null,
       utilizator: null,
       type: 'outcome',
-      removalDate: new Date(2020, 2, 11),
+      removalDate: new Date(),
       opened: false,
       amount: 0.001,
       description: ''
@@ -214,12 +213,12 @@ import {en, ru} from 'vuejs-datepicker/dist/locale'
           )
         }
       },
-      // handleOpened() {
-      //     this.opened = true
-      // },
-      // handleClosed() {
-      //     this.opened = false
-      // }
+      handleOpened() {
+          this.opened = true
+      },
+      handleClosed() {
+          this.opened = false
+      }
     },
     destroyed() {
       if (this.select && this.select2 && this.select3 && this.select.destroy) {

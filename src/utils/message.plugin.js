@@ -3,7 +3,7 @@ import localizeFilter from '@/filters/localize.filter'
 export default {
   install(Vue, options) {
     Vue.prototype.$message = function(html) {
-      M.toast({ html })
+      M.toast({ html, classes: 'yellow text-black' })
     }
 
     Vue.prototype.$error = function(html) {

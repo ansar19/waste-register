@@ -58,6 +58,17 @@ firebase.initializeApp({
   appId: "1:953274739599:web:e3c22eee681fcce63439fa"
 })
 
+// Not the best way but if you are frustrated by the console error just because you are using one of the external component (v-calendar for example).
+// const ignoreWarnMessage = 'The .native modifier for v-on is only valid on components but it was used on <div>.';
+// Vue.config.warnHandler = function (msg, vm, trace) {
+//   // `trace` is the component hierarchy trace
+//   if (msg === ignoreWarnMessage) {
+//     msg = null;
+//     vm = null;
+//     trace = null;
+//   }
+// }
+
 
 let app
 

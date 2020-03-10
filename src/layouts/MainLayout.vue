@@ -26,7 +26,7 @@ import messages from '@/utils/messages'
 export default {
   name: 'main-layout',
   data: () => ({
-    isOpen: true,
+    isOpen: false,
     loading: true
   }),
   async mounted() {
