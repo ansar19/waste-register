@@ -6,7 +6,11 @@
 
     <div class="history-chart text-center">
       <p class="text-align-center">{{'Waste_Pie_Title'|localize}}</p>
-      <canvas ref="canvas"></canvas>
+
+      <div class="chart-container">
+        <canvas ref="canvas"></canvas>
+      </div>
+
 
     </div>
     <br>
@@ -91,6 +95,10 @@ export default {
                 return total
               }, 0)
             }),
+            options: {
+                responsive: false,
+                maintainAspectRatio: false,
+            },
             backgroundColor: [
               'rgba(0, 105, 255, 0.5)',
               'rgba(62, 174, 226, 0.5)',
@@ -119,3 +127,12 @@ export default {
 }
 </script>
 
+<style scoped>
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+  width: 80vw;
+}
+
+</style>
