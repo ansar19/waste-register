@@ -76,6 +76,7 @@ const router = new Router({
     },
     {
       path: '/*',
+      meta: {layout: 'main', auth: true},
       component: () => import('./views/FourOhFour.vue')
     },
   ]
