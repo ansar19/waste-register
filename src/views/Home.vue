@@ -20,7 +20,7 @@
 
 
         <span class="copyright ml-auto my-auto mr-2 card-link">Copyright © 2018 - 2020
-          <a href="https:/ecomarine.kz" rel="nofollow">EcoMarine.kz</a>
+          <a href="https:/ecomarine.kz" target="_blank">EcoMarine.kz</a>
         </span>
       </div>
     </div>

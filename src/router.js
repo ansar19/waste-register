@@ -73,7 +73,11 @@ const router = new Router({
       name: 'record',
       meta: {layout: 'main', auth: true},
       component: () => import('./views/Record.vue')
-    }
+    },
+    {
+      path: '/*',
+      component: () => import('./views/FourOhFour.vue')
+    },
   ]
 })
 

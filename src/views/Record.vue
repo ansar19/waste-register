@@ -59,7 +59,7 @@
       <div class="from-group">
         <!-- <div>Opened: <span :class="[opened ? 'text-success' : 'text-danger']">{{ opened }}</span></div> -->
         <div>📅 {{'Removal_Date'|localize}}: </div>
-        <span>{{ removalDate }}</span>
+        <!-- <span>{{ removalDate }}</span> -->
         <d-datepicker
             v-model="removalDate"
             :language="ru" />
