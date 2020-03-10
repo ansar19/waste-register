@@ -81,12 +81,12 @@ export default {
 </script>
 
 <style lang="scss">
-// .header-navbar {
-//   .item-icon-wrapper {
-//     display: inline-block;
-//   }
-//   .dropdown-menu {
-//     display: block;
-//   }
-// }
+.header-navbar {
+  .item-icon-wrapper {
+    display: inline-block;
+  }
+  .dropdown-menu {
+    display: block;
+  }
+}
 </style>
