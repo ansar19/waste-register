@@ -11,7 +11,6 @@
         <canvas ref="canvas"></canvas>
       </div>
 
-
     </div>
     <br>
     <hr>
@@ -36,7 +35,7 @@
 <script>
 import paginationMixin from '@/mixins/pagination.mixin'
 import HistoryTable from '@/components/HistoryTable'
-import { Pie } from 'vue-chartjs'
+import { Doughnut } from 'vue-chartjs'
 import localizeFilter from '@/filters/localize.filter'
 
 export default {
@@ -46,7 +45,7 @@ export default {
       title: this.$title('Menu_History')
     }
   },
-  extends: Pie,
+  extends: Doughnut,
   mixins: [paginationMixin],
   data: () => ({
     loading: true,
@@ -96,7 +95,7 @@ export default {
               }, 0)
             }),
             options: {
-                responsive: false,
+                // responsive: false,
                 maintainAspectRatio: false,
             },
             backgroundColor: [
@@ -130,9 +129,9 @@ export default {
 <style scoped>
 .chart-container {
   position: relative;
-  margin: auto;
-  height: 80vh;
-  width: 80vw;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
 }
 
 </style>
