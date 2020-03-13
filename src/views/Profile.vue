@@ -19,21 +19,25 @@
         >{{'Message_EnterName'|localize}}</small>
       </div>
 
+      <div class="form-group">
+        <label for="company-name">{{'Company_Name'|localize}}</label>
+        <input
+          id="company-name"
+          type="text"
+          v-model="companyName"
+          :class="{invalid: $v.companyName.$dirty && !$v.companyName.required}" class="form-control"
+        >
+        <small
+          class="helper-text invalid"
+          v-if="$v.companyName.$dirty && !$v.companyName.required"
+        >{{'Message_Enter_Company_Name'|localize}}</small>
+      </div>
 
       <div class="mb-3 custom-control custom-switch">
         <span class="custom-control-description text-muted mr-3">Kazakh</span>
         <d-checkbox inline v-model="isRuLocale" toggle>
         </d-checkbox> <span class="custom-control-description text-muted ">Русский</span>
       </div>
-
-      <!-- <div class="switch">
-        <label>
-          English
-          <input type="checkbox" v-model="isRuLocale">
-          <span class="lever"></span>
-          Русский
-        </label>
-      </div> -->
 
       <button class="btn btn-success waves-effect waves-light" type="submit">
         {{'Update'|localize}}
@@ -55,13 +59,16 @@ export default {
   },
   data: () => ({
     name: '',
+    companyName: '',
     isRuLocale: true
   }),
   validations: {
-    name: { required }
+    name: { required },
+    companyName: { required }
   },
   mounted() {
     this.name = this.info.name
+    this.companyName = this.info.companyName
     this.isRuLocale = this.info.locale === 'ru-RU'
     setTimeout(() => {
       M.updateTextFields()
@@ -81,6 +88,7 @@ export default {
       try {
         await this.updateInfo({
           name: this.name,
+          companyName: this.companyName,
           locale: this.isRuLocale ? 'ru-RU' : 'kz-KZ'
         })
       } catch (e) {}

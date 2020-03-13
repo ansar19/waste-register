@@ -2,6 +2,7 @@
   <div>
     <div class="page-title">
       <h3>{{'History_Title'|localize}}</h3>
+      <p class="subcomponent-title">{{ companyName }}</p>
     </div>
 
     <div class="history-chart text-center">
@@ -118,6 +119,11 @@ export default {
           }
         ]
       })
+    }
+  },
+  computed: {
+    companyName() {
+      return this.$store.getters.info.companyName
     }
   },
   components: {
