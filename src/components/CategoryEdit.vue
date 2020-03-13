@@ -153,6 +153,9 @@ export default {
     this.select = M.FormSelect.init(this.$refs.select)
     M.updateTextFields()
   },
+  // updated() {
+	// 	this.select = (this.$refs.select).selectpicker('refresh')
+	// },
   destroyed() {
     if (this.select && this.select.destroy) {
       this.select.destroy()
