@@ -24,34 +24,27 @@
     </p>
 
     <section v-else>
+      <div class="row">
+        <div class="col-lg-12">
+          <router-link to="/record">
+            <button class="btn-sm btn-primary float-right">{{'Menu_NewRecord'|localize}}</button>
+          </router-link>
+        </div>
+      </div>
       
-
       <FilteredTable :records="items" />
 
-      <!-- <HistoryTable :records="items" /> -->
-
-      <!-- <Paginate
-        v-model="page"
-        :page-count="pageCount"
-        :click-handler="pageChangeHandler"
-        :prev-text="'Back' | localize"
-        :next-text="'Forward' | localize"
-        :container-class="'pagination'"
-        :page-class="'waves-effect'"
-      /> -->
     </section>
   </div>
 </template>
 
 <script>
-
 import paginationMixin from '@/mixins/pagination.mixin'
 import HistoryTable from '@/components/HistoryTable'
 import FilteredTable from '@/components/FilteredTable'
 
 import { Doughnut } from 'vue-chartjs'
 import localizeFilter from '@/filters/localize.filter'
-
 
 export default {
   name: 'history',
@@ -64,7 +57,7 @@ export default {
   mixins: [paginationMixin],
   data: () => ({
     loading: true,
-    records: [],
+    records: []
   }),
   async mounted() {
     this.records = await this.$store.dispatch('fetchRecords')
@@ -145,8 +138,8 @@ export default {
     },
     // IE 11 or later
     format(date) {
-      var month = date.toLocaleString("en-US", { month: 'short' })
-      return date.getDate() + ' ' + month + ' ' + date.getFullYear();
+      var month = date.toLocaleString('en-US', { month: 'short' })
+      return date.getDate() + ' ' + month + ' ' + date.getFullYear()
     }
   },
   components: {
