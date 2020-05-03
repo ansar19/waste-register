@@ -1,0 +1,68 @@
+<template>
+  <div class="col s12 m6">
+    <div>
+      <div class="page-subtitle">
+        <h4>{{'Create'|localize}}</h4>
+      </div>
+
+      <form @submit.prevent="submitHandler">
+        <div class="from-group">
+          <label for="name">{{'Title_Site'|localize}}</label>
+          <input id="name" type="text" v-model="siteName" :class="{invalid: $v.siteName.$dirty && !$v.siteName.required}" class="form-control">
+          <span v-if="$v.siteName.$dirty && !$v.siteName.required"
+            class="helper-text invalid">{{'Message_SiteTitle'|localize}}</span>
+        </div>
+
+        <div class="form-group">
+          <label for="site-comments">{{'Site_Comments'|localize}}</label>
+          <textarea id="site-comments" type="textarea" v-model="siteComments"
+            class="form-control">
+          </textarea>
+        </div>
+
+        <button class="btn btn-success waves-effect waves-light" type="submit">
+          {{'Create'|localize}}
+          <i class="material-icons right">send</i>
+        </button>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script>
+import { required, minValue } from 'vuelidate/lib/validators'
+import localizeFilter from '@/filters/localize.filter'
+
+export default {
+  data: () => ({
+    siteName: '',
+    siteComments: ''
+  }),
+  validations: {
+    siteName: { required }
+  },
+  mounted() {
+    M.updateTextFields()
+  },
+  methods: {
+    async submitHandler() {
+      if (this.$v.$invalid) {
+        this.$v.$touch()
+        return
+      }
+
+      try {
+        const site = await this.$store.dispatch('createSite', {
+          siteName: this.siteName,
+          siteComments: this.siteComments
+        })
+        this.siteName = ''
+        this.siteComments = ''
+        this.$v.$reset()
+        this.$message(localizeFilter('Site_HasBeenCreated'))
+        this.$emit('created', site)
+      } catch (e) {}
+    }
+  }
+}
+</script>

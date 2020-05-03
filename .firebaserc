@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "ecomarine-waste",
+    "staging": "ecomarine-waste"
+  }
+}
