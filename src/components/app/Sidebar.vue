@@ -20,9 +20,9 @@ export default {
   props: ['value'],
   data: () => ({
     links: [
-      { title: localizeFilter('Menu_Bill'), url: '/', exact: true },
+      { title: localizeFilter('Main_Panel'), url: '/', exact: true },
       { title: localizeFilter('Menu_History'), url: '/history' },
-      { title: localizeFilter('Menu_Planning'), url: '/planning' },
+      // { title: localizeFilter('Menu_Planning'), url: '/planning' },
       { title: localizeFilter('Menu_NewRecord'), url: '/record' },
       { title: localizeFilter('Menu_Sites'), url: '/sites' },
       { title: localizeFilter('Menu_Categories'), url: '/categories' },
@@ -32,6 +32,3 @@ export default {
   })
 }
 </script>
-
-
-

@@ -1,11 +1,11 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'Menu_Planning'|localize}}</h3>
+      <h5>{{'Menu_Planning'|localize}}</h5>
       <h5>{{info.bill.toFixed(2)}} {{'TON' | localize}}</h5>
     </div>
 
-    <Loader v-if="loading"/>
+    <Loader v-if="loading" />
 
     <p class="center" v-else-if="!categories.length">
       {{'NoCategories'|localize}}.
@@ -20,8 +20,9 @@
         </p>
 
         <div class="progress" v-tooltip.noloc="cat.tooltip">
-          <div 
-            class="determinate progress-bar" role="progressbar" 
+          <div
+            class="determinate progress-bar"
+            role="progressbar"
             :class="[cat.progressColor]"
             :style="{width: cat.progressPercent + '%'}"
           ></div>
@@ -54,7 +55,6 @@ export default {
   async mounted() {
     const records = await this.$store.dispatch('fetchRecords')
     const categoires = await this.$store.dispatch('fetchCategories')
-
 
     this.categories = categoires.map(cat => {
       const spend = records

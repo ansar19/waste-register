@@ -1,16 +1,27 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'Bill'|localize}}</h3>
+      <h3>{{'Main_Panel'|localize}}</h3>
+      <p class="subcomponent-title">{{ companyName }}</p>
       <!-- <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
-      </button> -->
+      </button>-->
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <Distribution />
+      </div>
+
+      <div class="col-lg-6">
+        <Planning />
+      </div>
     </div>
 
     <div class="card" style="width: 100%;">
       <div class="card-body">
         <!-- <h5 class="card-title">Card title</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> -->
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
         <p class="card-text">{{'Instruction_Line1'|localize}}</p>
         <p class="card-text">{{'Instruction_Line2'|localize}}</p>
         <p class="card-text">{{'Instruction_Line3'|localize}}</p>
@@ -18,9 +29,13 @@
         <p class="card-text">{{'Instruction_Line5'|localize}}</p>
         <p class="card-text">{{'Instruction_Line6'|localize}}</p>
 
-
-        <span class="copyright ml-auto my-auto mr-2 card-link">Copyright © 2018 - 2020
-          <a href="https://ecomarine.kz/" rel="nofollow" target="_blank">EcoMarine.kz</a>
+        <span class="copyright ml-auto my-auto mr-2 card-link">
+          Copyright © 2018 - 2020
+          <a
+            href="https://ecomarine.kz/"
+            rel="nofollow"
+            target="_blank"
+          >EcoMarine.kz</a>
         </span>
       </div>
     </div>
@@ -31,12 +46,13 @@
       <HomeBill :rates="currency.rates"/>
 
       <HomeCurrency :rates="currency.rates" :date="currency.date"/>
-    </div> -->
-
+    </div>-->
   </div>
 </template>
 
 <script>
+import Planning from '@/views/Planning'
+import Distribution from '@/components/Distribution'
 import HomeBill from '@/components/HomeBill'
 import HomeCurrency from '@/components/HomeCurrency'
 
@@ -55,14 +71,14 @@ export default {
     // this.currency = await this.$store.dispatch('fetchCurrency')
     this.loading = false
   },
-  methods: {
-    async refresh() {
-      this.loading = true
-      // this.currency = await this.$store.dispatch('fetchCurrency')
-      this.loading = false
-    }
+  computed: {
+    companyName() {
+      return this.$store.getters.info.companyName
+    },
   },
   components: {
+    Planning,
+    Distribution
     // HomeBill,
     // HomeCurrency
   }

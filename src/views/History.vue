@@ -5,16 +5,6 @@
       <p class="subcomponent-title">{{ companyName }}</p>
     </div>
 
-    <div class="history-chart text-center">
-      <p class="text-align-center">{{'Waste_Pie_Title'|localize}}</p>
-
-      <div class="chart-container">
-        <canvas ref="canvas"></canvas>
-      </div>
-    </div>
-    <br />
-    <hr />
-    <br />
 
     <Loader v-if="loading" />
 
@@ -92,44 +82,6 @@ export default {
           }
         })
       )
-
-      this.renderChart({
-        labels: categoires.map(c => c.title),
-        datasets: [
-          {
-            label: localizeFilter('CostsForCategories'),
-            data: categoires.map(c => {
-              return this.records.reduce((total, r) => {
-                if (r.categoryId === c.id && r.type === 'outcome') {
-                  total += +r.amount
-                }
-                return total
-              }, 0)
-            }),
-            options: {
-              // responsive: false,
-              maintainAspectRatio: false
-            },
-            backgroundColor: [
-              'rgba(0, 105, 255, 0.5)',
-              'rgba(62, 174, 226, 0.5)',
-              'rgba(255, 206, 86, 0.5)',
-              'rgba(217, 199, 255, 0.5)',
-              'rgba(153, 102, 255, 0.5)',
-              'rgba(116, 62, 226, 0.5)'
-            ],
-            borderColor: [
-              'rgba(0, 105, 255, 1)',
-              'rgba(62, 174, 226, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(217, 199, 255, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(116, 62, 226, 1)'
-            ],
-            borderWidth: 1
-          }
-        ]
-      })
     }
   },
   computed: {
@@ -148,13 +100,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.chart-container {
-  position: relative;
-  text-align: center;
-  margin: 0 auto;
-  max-width: 600px;
-  min-width: 320px;
-}
-</style>
