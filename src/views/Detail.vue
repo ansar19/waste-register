@@ -13,15 +13,7 @@
       </nav>
 
       <div class="row">
-        <div class="col-sm-2">
-          <div class="card">
-            <div class="card-body dark-grey-text">
-              <div class="d-flex justify-center">
-                <qr-code :text="record.id" size="116" color="#17c671" error-level="H"></qr-code>
-              </div>
-            </div>
-          </div>
-        </div>
+        
 
         <div class="col-sm-10">
           <div
@@ -56,6 +48,17 @@
             </div>
           </div>
         </div>
+
+        <div class="col-sm-2">
+          <div class="card">
+            <div class="card-body dark-grey-text">
+              <div class="d-flex justify-center">
+                <qr-code :text="record.id" v-bind:size="116" color="#17c671" error-level="H"></qr-code>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <p class="center" v-else>Запись с id={{$route.params.id}} не найдена</p>
