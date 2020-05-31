@@ -20,6 +20,7 @@
     "vue-good-table": "^2.19.1",
     "vue-json-excel": "^0.2.98",
     "vue-meta": "^1.6.0",
+    "vue-qrcode-component": "^2.1.1",
     "vue-router": "^3.1.6",
     "vuejs-paginate": "^2.1.0",
     "vuelidate": "^0.7.5",
