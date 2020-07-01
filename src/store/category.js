@@ -49,6 +49,7 @@ export default {
       additionalInfo,
       wasteIndex,
       limit,
+      limitKZT,
       id
     }) {
       try {
@@ -64,7 +65,8 @@ export default {
           emergency,
           additionalInfo,
           wasteIndex,
-          limit
+          limit,
+          limitKZT
         })
       } catch (e) {
         commit('setError', e)
@@ -85,7 +87,8 @@ export default {
       emergency,
       additionalInfo,
       wasteIndex,
-      limit
+      limit,
+      limitKZT
     }) {
       try {
         const uid = await dispatch('getUid')
@@ -100,7 +103,8 @@ export default {
           emergency,
           additionalInfo,
           wasteIndex,
-          limit
+          limit,
+          limitKZT
         })
         return {
           title,
@@ -108,6 +112,7 @@ export default {
           sourceMaterials,
           processName,
           limit,
+          limitKZT,
           recyclingType,
           precaution,
           transportationRequirements,

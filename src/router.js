@@ -69,6 +69,12 @@ const router = new Router({
       component: () => import('./views/Planning.vue')
     },
     {
+      path: '/limits',
+      name: 'limits',
+      meta: {layout: 'main', auth: true},
+      component: () => import('./views/Limits.vue')
+    },
+    {
       path: '/profile',
       name: 'profile',
       meta: {layout: 'main', auth: true},

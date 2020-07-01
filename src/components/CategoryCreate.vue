@@ -24,34 +24,19 @@
         <!-- Код отхода -->
         <div class="from-group">
           <label for="waste-code">{{'Waste_Code'|localize}}</label>
-          <input
-            id="waste-code"
-            type="text"
-            v-model="wasteCode"
-            class="form-control"
-          />
+          <input id="waste-code" type="text" v-model="wasteCode" class="form-control" />
         </div>
 
         <!-- Перечень и наименование исходных материалов, из которых образовались отходы -->
         <div class="from-group">
           <label for="source-materials">{{'Source_Materials'|localize}}</label>
-          <input
-            id="source-materials"
-            type="text"
-            v-model="sourceMaterials"
-            class="form-control"
-          />
+          <input id="source-materials" type="text" v-model="sourceMaterials" class="form-control" />
         </div>
 
         <!-- Наименование технологического процесса -->
         <div class="from-group">
           <label for="process-name">{{'Process_Name'|localize}}</label>
-          <input
-            id="process-name"
-            type="text"
-            v-model="processName"
-            class="form-control"
-          />
+          <input id="process-name" type="text" v-model="processName" class="form-control" />
         </div>
 
         <!-- Рекомендуемый способ переработки отходов -->
@@ -112,7 +97,7 @@
             class="form-control"
           ></textarea>
         </div>
-        
+
         <!-- Дополнительная информация -->
         <div class="form-group">
           <label for="additional-info">{{'Additional_Information'|localize}}</label>
@@ -127,15 +112,12 @@
         <!-- индекс отхода  -->
         <div class="form-group">
           <label for="waste-index">{{'Waste_Index'|localize}}</label>
-          <input
-            id="waste-index"
-            type="text"
-            v-model="wasteIndex"
-            class="form-control"
-          >
+          <input id="waste-index" type="text" v-model="wasteIndex" class="form-control" />
         </div>
 
         <!-- END -->
+
+        <!-- Limit waste -->
 
         <div class="form-group">
           <label for="limit">{{'Limit'|localize}}</label>
@@ -149,6 +131,24 @@
 
           <span
             v-if="$v.limit.$dirty && !$v.limit.minValue"
+            class="helper-text invalid"
+          >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
+        </div>
+
+        <!-- Limit KZT -->
+
+        <div class="form-group">
+          <label for="limitKZT">{{'Limit_KZT'|localize}}</label>
+          <input
+            id="limitKZT"
+            type="number"
+            v-model.number="limitKZT"
+            :class="{invalid: $v.limitKZT.$dirty && !$v.limitKZT.minValue}"
+            class="form-control"
+          />
+
+          <span
+            v-if="$v.limitKZT.$dirty && !$v.limitKZT.minValue"
             class="helper-text invalid"
           >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
@@ -178,13 +178,15 @@ export default {
     emergency: '',
     additionalInfo: '',
     wasteIndex: '',
-    limit: 100
+    limit: 100,
+    limitKZT: 50000
   }),
   validations: {
     title: { required },
     recyclingType: { required },
     precaution: { required },
-    limit: { minValue: minValue(1) }
+    limit: { minValue: minValue(1) },
+    limitKZT: { minValue: minValue(1) }
   },
   mounted() {
     M.updateTextFields()
@@ -208,7 +210,8 @@ export default {
           emergency: this.emergency,
           additionalInfo: this.additionalInfo,
           wasteIndex: this.wasteIndex,
-          limit: this.limit
+          limit: this.limit,
+          limitKZT: this.limitKZT
         })
         this.title = ''
         this.wasteCode = ''
@@ -220,7 +223,8 @@ export default {
         this.wasteIndex = ''
         ;(this.transportationRequirements = ''),
           (this.emergency = ''),
-          (this.limit = 100)
+          (this.limit = 100),
+          (this.limitKZT = 50000)
         this.$v.$reset()
         this.$message(localizeFilter('Category_HasBeenCreated'))
         this.$emit('created', category)

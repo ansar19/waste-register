@@ -9,12 +9,8 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-12">
         <Distribution />
-      </div>
-
-      <div class="col-lg-6">
-        <Planning />
       </div>
     </div>
 
@@ -52,6 +48,7 @@
 
 <script>
 import Planning from '@/views/Planning'
+import PlanningMoney from '@/views/PlanningMoney'
 import Distribution from '@/components/Distribution'
 import HomeBill from '@/components/HomeBill'
 import HomeCurrency from '@/components/HomeCurrency'
@@ -74,10 +71,11 @@ export default {
   computed: {
     companyName() {
       return this.$store.getters.info.companyName
-    },
+    }
   },
   components: {
     Planning,
+    PlanningMoney,
     Distribution
     // HomeBill,
     // HomeCurrency
