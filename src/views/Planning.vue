@@ -72,7 +72,7 @@ export default {
       const tooltipValue = cat.limit - spend
       const tooltip = `${
         tooltipValue < 0 ? localizeFilter('MoreThan') : localizeFilter('Stayed')
-      } ${currencyFilter(Math.abs(tooltipValue))}`
+      } ${(Math.abs(tooltipValue))}`
 
       return {
         ...cat,
