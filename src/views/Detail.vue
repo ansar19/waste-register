@@ -43,7 +43,31 @@
                 {{'Precaution_Title'|localize}}:
                 <small>{{record.precaution}}</small>
               </p>
+
+              <div >
+              <strong>Происхождение отходов:</strong>
+              <table class="responsive-table">
+                <thead>
+                  <tr>
+                    <th><label>Перечень и наименование исходных материалов, из которых образовались отходы</label></th>
+                    <th><label>Наименование технологического процесса</label></th>
+                    <th><label>Перечень опасных свойств отходов</label></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="item" v-for="(waste, index) in record.wastesOrigin" :key="index">
+                    <td>{{waste.wasteSource}}</td>
+                    <td>{{waste.processName}}</td>
+                    <td>{{waste.hazardProperty}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+
+            </div>
+
+            
+
           </div>
         </div>
 
@@ -98,6 +122,7 @@ export default {
     this.record = {
       ...record,
       categoryName: category.title,
+      wastesOrigin: category.wastesOrigin,
       recyclingType: category.recyclingType,
       precaution: category.precaution,
       transportationRequirements: category.transportationRequirements,
@@ -134,6 +159,7 @@ export default {
         doc.setData({
           ..._this.record,
           categoryName: _this.record.categoryName,
+          wastesOrigin: _this.record.wastesOrigin,
           amount: _this.record.amount,
           categoryName: _this.record.categoryName,
           description: _this.record.description

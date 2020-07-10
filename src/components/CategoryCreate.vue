@@ -39,6 +39,37 @@
           <input id="process-name" type="text" v-model="processName" class="form-control" />
         </div>
 
+        <!-- Происхождение отходов -->
+
+        <div class="input-field">
+          <h5>Происхождение отходов</h5>
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th><label>Перечень и наименование исходных материалов, из которых образовались отходы</label></th>
+                <th><label>Наименование технологического процесса</label></th>
+                <th><label>Перечень опасных свойств отходов</label></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="item" v-for="(waste, index) in wastesOrigin" :key="index">
+                <td><input type="text" v-model="waste.wasteSource" /></td>
+                <td><input type="text" v-model="waste.processName" /></td>
+                <td><input type="text" v-model="waste.hazardProperty" /></td>
+                <td class="text-right">
+                  <button class="btn btn-danger waves-effect waves-light" v-on:click="deleteItem(index)"><i class="material-icons">delete</i></button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <button class="waves-effect waves-light btn-small" @click.prevent="addRow"><i class="material-icons">exposure_plus_1</i></button>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+
         <!-- Рекомендуемый способ переработки отходов -->
         <div class="form-group">
           <label for="name">{{'Recycling_Type'|localize}}</label>
@@ -172,6 +203,9 @@ export default {
     wasteCode: '',
     sourceMaterials: '',
     processName: '',
+    wastesOrigin: [
+      { wasteSource: "", processName: "", hazardProperty: "" }
+    ],
     recyclingType: '',
     precaution: '',
     transportationRequirements: '',
@@ -204,6 +238,7 @@ export default {
           wasteCode: this.wasteCode,
           sourceMaterials: this.sourceMaterials,
           processName: this.processName,
+          wastesOrigin: this.wastesOrigin,
           recyclingType: this.recyclingType,
           precaution: this.precaution,
           transportationRequirements: this.transportationRequirements,
@@ -217,6 +252,7 @@ export default {
         this.wasteCode = ''
         this.sourceMaterials = ''
         this.processName = ''
+        this.wastesOrigin = []
         this.recyclingType = ''
         this.precaution = ''
         this.additionalInfo = ''
@@ -229,7 +265,18 @@ export default {
         this.$message(localizeFilter('Category_HasBeenCreated'))
         this.$emit('created', category)
       } catch (e) {}
-    }
+    },
+    addRow() {
+      this.wastesOrigin.push({
+        wasteSource: "",
+        processName: "",
+        hazardProperty: ""
+      });
+    },
+    deleteItem(index) {
+      this.wastesOrigin.splice(index, 1);
+    },
   }
+  
 }
 </script>
