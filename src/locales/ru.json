@@ -147,5 +147,25 @@
   "Download_Data": "Выгрузить данные",
   "Search_Text": "Введите текст для поиска",
   "Delete_Button": "Удалить",
-  "Add_Row_Button": "Добавить"
+  "Add_Row_Button": "Добавить",
+  "Please_Select": "Пожалуйста выберите из списка",
+  "Waste_Origin": "Происхождение отходов",
+  "Waste_Source": "Перечень и наименование исходных материалов, из которых образовались отходы",
+  "Waste_Process_Name": "Наименование технологического процесса",
+  "Waste_Hazard_Property": "Перечень опасных свойств отходов",
+  "Waste_Chemical_Composition": "Химический состав отходов и описание опасных свойств их компонентов",
+  "Waste_Component_Name": "Наименование компонента отходов",
+  "Waste_Component_Concentration": "Концентрации Сi, мг/кг",
+  "Waste_Index_Source_Name": "Наименование и единица измерения",
+  "Value_Label": "Значение",
+  "Waste_Level_Label": "Уровень опасности отхода",
+  "Waste_Haz_Waste_Level_Value":"Уровень опасности отхода (значение)",
+  "Waste_Index_Source_Document": "Обозначение документа, из которого взята характеристика",
+  "Details_Comment": "Больше деталей в файле для выгрузки",
+  "Red": "Красный",
+  "Amber": "Янтарный",
+  "Green": "Зеленый",
+  "Not_Applicable": "Не применимо",
+  "Waste_Color": "Цвет отхода"
+
 }

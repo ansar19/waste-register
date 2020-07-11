@@ -43,7 +43,7 @@ export default {
     return {
       columns: [
         {
-          label: 'Объем',
+          label: 'Объем, т',
           field: 'amount',
           type: 'number',
           sortable: true

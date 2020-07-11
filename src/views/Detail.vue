@@ -17,66 +17,49 @@
           <div
             class="card"
             :class="{
-            'yellow': record.type === 'outcome',
-            'alert-info': record.type === 'income'
+            'card-bg-light-yellow': record.type === 'outcome',
+            'card-bg-light-light-blue': record.type === 'income'
           }"
           >
             <div class="card-body dark-grey-text">
-              <small>{{record.date | date('datetime')}}</small>
-              <p>
-                {{'Company_Name'|localize}}:
-                <small>{{companyName}}</small>
-              </p>
-              <p>
-                {{'Category'|localize}}:
-                <small>{{record.categoryName}}</small>
-              </p>
-              <p>
-                {{'Waste_Code'|localize}}:
-                <small>{{record.wasteCode}}</small>
-              </p>
-              <p>
-                {{'Amount'|localize}}:
-                <small>{{record.amount | currency}}</small>
-              </p>
-              <p>
-                {{'Description'|localize}}:
-                <small>{{record.description}}</small>
-              </p>
-              <p>
-                {{'Recycling_Type'|localize}}:
-                <small>{{record.recyclingType}}</small>
-              </p>
-              <p>
-                {{'Precaution_Title'|localize}}:
-                <small>{{record.precaution}}</small>
-              </p>
-
-              <div>
-                <strong>Происхождение отходов:</strong>
+              <div class="vertical-table">
                 <table>
-                  <thead>
-                    <tr>
-                      <th class="#fafafa grey lighten-5" style="width: 30%;">
-                        <label>Перечень и наименование исходных материалов, из которых образовались отходы</label>
-                      </th>
-                      <th class="#fafafa grey lighten-5" style="width: 30%;">
-                        <label>Наименование технологического процесса</label>
-                      </th>
-                      <th class="#fafafa grey lighten-5" style="width: 40%;">
-                        <label>Перечень опасных свойств отходов</label>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="item" v-for="(waste, index) in record.wastesOrigin" :key="index">
-                      <td>{{waste.wasteSource}}</td>
-                      <td>{{waste.processName}}</td>
-                      <td>{{waste.hazardProperty}}</td>
-                    </tr>
-                  </tbody>
+                  <tr>
+                    <th>{{'Removal_Date' | localize}}:</th>
+                    <td>{{record.date | date('datetime')}}</td>
+                  </tr>
+                  <tr>
+                    <th>{{'Category'|localize}}:</th>
+                    <td>{{record.categoryName}}</td>
+                  </tr>
+                  <!-- <tr>
+                  <th>{{'Waste_Code'|localize}}:</th>
+                  <td>{{record.wasteCode}}</td>
+                  </tr>-->
+                  <tr>
+                    <th>{{'Amount'|localize}}:</th>
+                    <td>{{record.amount}}</td>
+                  </tr>
+                  <tr>
+                    <th>{{'Description'|localize}}:</th>
+                    <td>{{record.description}}</td>
+                  </tr>
+                  <tr>
+                    <th>{{'Company_Name'|localize}}:</th>
+                    <td>{{record.companyInfo.companyName}}</td>
+                  </tr>
+                  <tr>
+                    <th>{{'Title_Transporter' | localize}}:</th>
+                    <td>{{record.transporterName}}</td>
+                  </tr>
+                  <tr>
+                    <th>{{'Title_Utilizator' | localize}}:</th>
+                    <td>{{record.utilizatorName}}</td>
+                  </tr>
                 </table>
               </div>
+
+              <blockquote class="mt-3">{{'Details_Comment' | localize }}</blockquote>
             </div>
           </div>
         </div>
@@ -125,9 +108,15 @@ export default {
     const id = this.$route.params.id
 
     const record = await this.$store.dispatch('fetchRecordById', id)
+
     const category = await this.$store.dispatch(
       'fetchCategoryById',
       record.categoryId
+    )
+
+    const transporter = await this.$store.dispatch(
+      'fetchTransporterById',
+      record.transporterId
     )
 
     const utilizator = await this.$store.dispatch(
@@ -138,15 +127,17 @@ export default {
     this.record = {
       ...record,
       categoryName: category.title,
-      companyName: this.companyName,
-      companyHead: this.companyHead,
+      companyInfo: this.companyInfo,
       wasteCode: category.wasteCode,
+      wasteColor: category.wasteColor,
       wasteIndex: category.wasteIndex,
       wastesOrigin: category.wastesOrigin,
+      wastesComposition: category.wastesComposition,
       recyclingType: category.recyclingType,
       precaution: category.precaution,
       transportationRequirements: category.transportationRequirements,
       emergency: category.emergency,
+      transporterName: transporter.title,
       utilizatorName: utilizator.title
     }
 
@@ -180,11 +171,13 @@ export default {
         doc.setData({
           ..._this.record,
           categoryName: _this.record.categoryName,
-          companyName: _this.record.companyName,
-          companyHead: _this.record.companyHead,
+          companyInfo: _this.record.companyInfo,
+          replaceHazardList: _this.replaceHazardList,
           wasteCode: _this.record.wasteCode,
+          wasteColor: _this.record.wasteColor,
           wasteIndex: _this.record.wasteIndex,
           wastesOrigin: _this.record.wastesOrigin,
+          wastesComposition: _this.record.wastesComposition,
           amount: _this.record.amount,
           categoryName: _this.record.categoryName,
           description: _this.record.description
@@ -217,15 +210,33 @@ export default {
     }
   },
   computed: {
-    companyName() {
-      return this.$store.getters.info.companyName
+    companyInfo() {
+      return this.$store.getters.info
     },
-    companyHead() {
-      return this.$store.getters.info.companyHead
+    replaceHazardList() {
+      if (this.record.wasteColor == 'amber') {
+        return 'A'
+      } else if (this.record.wasteColor == 'red') {
+        return 'R'
+      } else if (this.record.wasteColor == 'green') {
+        return 'G'
+      } else {
+        return '-'
+      }
     }
   },
+
   components: {
     'qr-code': VueQRCodeComponent
   }
 }
 </script>
+
+<style scoped>
+.card-bg-light-yellow {
+  background-color: #fff9c4;
+}
+.card-bg-light-light-blue {
+  background-color: #b3e5fc;
+}
+</style>

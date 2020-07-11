@@ -27,45 +27,134 @@
           <input id="waste-code" type="text" v-model="wasteCode" class="form-control" />
         </div>
 
-        <!-- Перечень и наименование исходных материалов, из которых образовались отходы -->
-        <div class="from-group">
-          <label for="source-materials">{{'Source_Materials'|localize}}</label>
-          <input id="source-materials" type="text" v-model="sourceMaterials" class="form-control" />
-        </div>
-
-        <!-- Наименование технологического процесса -->
-        <div class="from-group">
-          <label for="process-name">{{'Process_Name'|localize}}</label>
-          <input id="process-name" type="text" v-model="processName" class="form-control" />
-        </div>
-
         <!-- Происхождение отходов -->
 
         <div class="input-field">
-          <h5>Происхождение отходов</h5>
+          <h5>{{ 'Waste_Origin' | localize }}</h5>
           <table class="responsive-table">
             <thead>
               <tr>
-                <th><label>Перечень и наименование исходных материалов, из которых образовались отходы</label></th>
-                <th><label>Наименование технологического процесса</label></th>
-                <th><label>Перечень опасных свойств отходов</label></th>
+                <th>
+                  <label>{{'Waste_Source' | localize}}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Process_Name' | localize}}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Hazard_Property' | localize}}</label>
+                </th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
               <tr class="item" v-for="(waste, index) in wastesOrigin" :key="index">
-                <td><input type="text" v-model="waste.wasteSource" /></td>
-                <td><input type="text" v-model="waste.processName" /></td>
-                <td><input type="text" v-model="waste.hazardProperty" /></td>
+                <td>
+                  <input type="text" v-model="waste.wasteSource" />
+                </td>
+                <td>
+                  <input type="text" v-model="waste.processName" />
+                </td>
+                <td>
+                  <input type="text" v-model="waste.hazardProperty" />
+                </td>
                 <td class="text-right">
-                  <button class="btn btn-danger waves-effect waves-light" v-on:click="deleteItem(index)"><i class="material-icons">delete</i></button>
+                  <button
+                    class="btn btn-danger waves-effect waves-light"
+                    @click.prevent="deleteItem(index)"
+                  >
+                    <i class="material-icons">delete</i>
+                  </button>
                 </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <button class="waves-effect waves-light btn-small" @click.prevent="addRow"><i class="material-icons">exposure_plus_1</i></button>
+                  <button class="waves-effect waves-light btn-small" @click.prevent="addRow">
+                    <i class="material-icons">exposure_plus_1</i>
+                  </button>
                 </td>
-                </tr>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Химический состав отходов и описание опасных свойств их компонентов: -->
+
+        <div class="input-field">
+          <h5>{{'Waste_Chemical_Composition' | localize }}</h5>
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th>
+                  <label>{{'Waste_Component_Name' | localize }}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Component_Concentration' | localize }}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Index_Source_Name' | localize }}</label>
+                </th>
+                <th>
+                  <label>{{'Value_Label' | localize }}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Level_Label' | localize }}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Haz_Waste_Level_Value' | localize }}</label>
+                </th>
+                <th>
+                  <label>{{'Waste_Index_Source_Document' | localize }}</label>
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="item" v-for="(w, idx) in wastesComposition" :key="idx">
+                <td>
+                  <input type="text" v-model="w.wasteComponentName" />
+                </td>
+                <td>
+                  <input type="number" v-model.number="w.wasteComponentConcentration" />
+                </td>
+                <td>
+                  <input type="text" v-model="w.wasteIndexSourceName" />
+                </td>
+                <td>
+                  <input type="text" v-model="w.wasteIndexSourceValue" />
+                </td>
+                <td>
+                  <select v-model="w.hazWasteLevel" class="browser-default">
+                    <option value disabled selected>{{ 'Please_Select' | localize }}</option>
+                    <option value="amber">A</option>
+                    <option value="red">R</option>
+                    <option value="green">G</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="number" v-model.number="w.hazWasteLevelValue" />
+                </td>
+                <td>
+                  <input type="text" v-model="w.wasteIndexSourceDocument" />
+                </td>
+                <td class="text-right">
+                  <button
+                    class="btn btn-danger waves-effect waves-light"
+                    @click.prevent="deleteWasteComposition(idx)"
+                  >
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                  <button
+                    class="waves-effect waves-light btn-small"
+                    @click.prevent="addWasteComposition"
+                  >
+                    <i class="material-icons">exposure_plus_1</i>
+                  </button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -140,7 +229,32 @@
           ></textarea>
         </div>
 
-        <!-- индекс отхода  -->
+        <!-- waste color -->
+        <label>{{'Waste_Color' | localize}}</label>
+        <p>
+          <label for="one">
+            <input name="group1" type="radio" id="one" value="red" v-model="wasteColor" />
+            <span>{{'Red' | localize}}</span>
+          </label>
+          <br />
+          <label for="two">
+            <input name="group1" type="radio" id="two" value="amber" v-model="wasteColor" />
+            <span>{{'Amber' | localize}}</span>
+          </label>
+          <br />
+          <label for="three">
+            <input name="group1" type="radio" id="three" value="green" v-model="wasteColor" />
+            <span>{{'Green' | localize}}</span>
+          </label>
+          <br />
+          <label for="four">
+            <input name="group1" type="radio" id="four" value="na" v-model="wasteColor" />
+            <span>{{'Not_Applicable' | localize}}</span>
+          </label>
+          <br />
+
+          <!-- индекс отхода  -->
+        </p>
         <div class="form-group">
           <label for="waste-index">{{'Waste_Index'|localize}}</label>
           <input id="waste-index" type="text" v-model="wasteIndex" class="form-control" />
@@ -184,7 +298,7 @@
           >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
 
-        <button class="btn btn-success waves-effect waves-light" type="submit">
+        <button class="btn btn-success waves-effect waves-light mb-4" type="submit">
           {{'Create'|localize}}
           <i class="material-icons right">send</i>
         </button>
@@ -201,10 +315,24 @@ export default {
   data: () => ({
     title: '',
     wasteCode: '',
-    sourceMaterials: '',
-    processName: '',
+    wasteColor: '',
     wastesOrigin: [
-      { wasteSource: "", processName: "", hazardProperty: "" }
+      {
+        wasteSource: '',
+        processName: '',
+        hazardProperty: ''
+      }
+    ],
+    wastesComposition: [
+      {
+        wasteComponentName: '',
+        wasteComponentConcentration: '',
+        wasteIndexSourceName: '',
+        wasteIndexSourceValue: '',
+        hazWasteLevel: '',
+        hazWasteLevelValue: '',
+        wasteIndexSourceDocument: ''
+      }
     ],
     recyclingType: '',
     precaution: '',
@@ -236,9 +364,9 @@ export default {
         const category = await this.$store.dispatch('createCategory', {
           title: this.title,
           wasteCode: this.wasteCode,
-          sourceMaterials: this.sourceMaterials,
-          processName: this.processName,
+          wasteColor: this.wasteColor,
           wastesOrigin: this.wastesOrigin,
+          wastesComposition: this.wastesComposition,
           recyclingType: this.recyclingType,
           precaution: this.precaution,
           transportationRequirements: this.transportationRequirements,
@@ -250,9 +378,9 @@ export default {
         })
         this.title = ''
         this.wasteCode = ''
-        this.sourceMaterials = ''
-        this.processName = ''
+        this.wasteColor = ''
         this.wastesOrigin = []
+        this.wastesComposition = []
         this.recyclingType = ''
         this.precaution = ''
         this.additionalInfo = ''
@@ -268,15 +396,28 @@ export default {
     },
     addRow() {
       this.wastesOrigin.push({
-        wasteSource: "",
-        processName: "",
-        hazardProperty: ""
-      });
+        wasteSource: '',
+        processName: '',
+        hazardProperty: ''
+      })
     },
     deleteItem(index) {
-      this.wastesOrigin.splice(index, 1);
+      this.wastesOrigin.splice(index, 1)
     },
+    addWasteComposition() {
+      this.wastesComposition.push({
+        wasteComponentName: '',
+        wasteComponentConcentration: '',
+        wasteIndexSourceName: '',
+        wasteIndexSourceValue: '',
+        hazWasteLevel: '',
+        hazWasteLevelValue: '',
+        wasteIndexSourceDocument: ''
+      })
+    },
+    deleteWasteComposition(idx) {
+      this.wastesComposition.splice(idx, 1)
+    }
   }
-  
 }
 </script>
