@@ -10,16 +10,16 @@
     <!-- <p class="center" v-else-if="!categories.length">
       {{'NoCategories'|localize}}.
       <router-link to="/categories">{{'AddFirst'|localize}}</router-link>
-    </p> -->
+    </p>-->
 
-    <section >
+    <section>
       <div class="history-chart text-center">
-      <p class="text-align-center">{{'Waste_Pie_Title'|localize}}</p>
+        <p class="text-align-center">{{'Waste_Pie_Title'|localize}}</p>
 
-      <div class="chart-container">
-        <canvas ref="canvas"></canvas>
+        <div class="chart-container">
+          <canvas ref="canvas"></canvas>
+        </div>
       </div>
-    </div>
     </section>
   </div>
 </template>
@@ -101,20 +101,42 @@ export default {
               maintainAspectRatio: false
             },
             backgroundColor: [
-              'rgba(0, 105, 255, 0.5)',
-              'rgba(62, 174, 226, 0.5)',
-              'rgba(255, 206, 86, 0.5)',
-              'rgba(217, 199, 255, 0.5)',
-              'rgba(153, 102, 255, 0.5)',
-              'rgba(116, 62, 226, 0.5)'
+              '#f44336',
+              '#e91e63',
+              '#9c27b0',
+              '#673ab7',
+              '#3f51b5',
+              '#2196f3',
+              '#03a9f4',
+              '#00bcd4',
+              '#009688',
+              '#4caf50',
+              '#ffeb3b',
+              '#ffc107',
+              '#ff9800',
+              '#ff5722',
+              '#795548',
+              '#9e9e9e',
+              '#607d8b'
             ],
             borderColor: [
-              'rgba(0, 105, 255, 1)',
-              'rgba(62, 174, 226, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(217, 199, 255, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(116, 62, 226, 1)'
+              '#f44336',
+              '#e91e63',
+              '#9c27b0',
+              '#673ab7',
+              '#3f51b5',
+              '#2196f3',
+              '#03a9f4',
+              '#00bcd4',
+              '#009688',
+              '#4caf50',
+              '#ffeb3b',
+              '#ffc107',
+              '#ff9800',
+              '#ff5722',
+              '#795548',
+              '#9e9e9e',
+              '#607d8b'
             ],
             borderWidth: 1
           }
