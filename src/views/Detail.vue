@@ -172,6 +172,7 @@ export default {
           ..._this.record,
           categoryName: _this.record.categoryName,
           companyInfo: _this.record.companyInfo,
+          companyHead: _this.record.companyInfo.companyHead,
           replaceHazardList: _this.replaceHazardList,
           wasteCode: _this.record.wasteCode,
           wasteColor: _this.record.wasteColor,

@@ -45,17 +45,32 @@
                 </th>
                 <th></th>
               </tr>
-            </thead> -->
+            </thead>-->
             <tbody>
               <tr class="item" v-for="(waste, index) in wastesOrigin" :key="index">
-                <td><label>{{'Waste_Source' | localize}}
-                  <input type="text" v-model="waste.wasteSource" /></label>
+                <td>
+                  <label>
+                    {{'Waste_Source' | localize}}
+                    <input type="text" v-model="waste.wasteSource" />
+                  </label>
                 </td>
-                <td><label>{{'Waste_Process_Name' | localize}}
-                  <input type="text" v-model="waste.processName" /></label>
+                <td>
+                  <label>
+                    {{'Waste_Process_Name' | localize}}
+                    <input
+                      type="text"
+                      v-model="waste.processName"
+                    />
+                  </label>
                 </td>
-                <td><label>{{'Waste_Hazard_Property' | localize}}
-                  <input type="text" v-model="waste.hazardProperty" /></label>
+                <td>
+                  <label>
+                    {{'Waste_Hazard_Property' | localize}}
+                    <input
+                      type="text"
+                      v-model="waste.hazardProperty"
+                    />
+                  </label>
                 </td>
                 <td class="text-right">
                   <button
@@ -107,37 +122,73 @@
                 </th>
                 <th></th>
               </tr>
-            </thead> -->
+            </thead>-->
             <tbody>
               <tr class="item" v-for="(w, idx) in wastesComposition" :key="idx">
-                <td><label>{{'Waste_Component_Name' | localize }}
-                  <input type="text" v-model="w.wasteComponentName" /></label>
+                <td>
+                  <label class="small-font">
+                    {{'Waste_Component_Name' | localize }}
+                    <input
+                      type="text"
+                      v-model="w.wasteComponentName"
+                    />
+                  </label>
                 </td>
                 <td>
-                  <label>{{'Waste_Component_Concentration' | localize }}<input type="number" v-model.number="w.wasteComponentConcentration" /></label>
+                  <label class="small-font">
+                    {{'Waste_Component_Concentration' | localize }}
+                    <input type="number" v-model.number="w.wasteComponentConcentration" />
+                  </label>
                 </td>
                 <td>
-                  <label>{{'Waste_Index_Source_Name' | localize }}<input type="text" v-model="w.wasteIndexSourceName" /></label>
+                  <label class="small-font">
+                    {{'Waste_Index_Source_Name' | localize }}
+                    <input type="text" v-model="w.wasteIndexSourceName" />
+                  </label>
                 </td>
-                <td> <label>{{'Value_Label' | localize }}
-                  <input type="text" v-model="w.wasteIndexSourceValue" /></label>
+                <td>
+                  <label class="small-font">
+                    {{'Value_Label' | localize }}
+                    <input
+                      type="text"
+                      v-model="w.wasteIndexSourceValue"
+                    />
+                  </label>
                 </td>
-                <td><label>{{'Waste_Level_Label' | localize }}
-                  <select v-model="w.hazWasteLevel" class="browser-default">
-                    <option value disabled selected>{{ 'Please_Select' | localize }}</option>
-                    <option value="amber">A</option>
-                    <option value="red">R</option>
-                    <option value="green">G</option>
-                  </select></label>
+                <td>
+                  <label class="small-font">
+                    {{'Waste_Level_Label' | localize }}
+                    <select
+                      v-model="w.hazWasteLevel"
+                      class="browser-default"
+                    >
+                      <option value disabled selected>{{ 'Please_Select' | localize }}</option>
+                      <option value="amber">A</option>
+                      <option value="red">R</option>
+                      <option value="green">G</option>
+                    </select>
+                  </label>
                 </td>
-               
-                <td><label>{{'Waste_Haz_Waste_Level_Value' | localize }}
-                  <input type="number" v-model.number="w.hazWasteLevelValue" /></label>
+
+                <td>
+                  <label class="small-font">
+                    {{'Waste_Haz_Waste_Level_Value' | localize }}
+                    <input
+                      type="number"
+                      v-model.number="w.hazWasteLevelValue"
+                    />
+                  </label>
                 </td>
-                <td><label>{{'Waste_Index_Source_Document' | localize }}
-                  <input type="text" v-model="w.wasteIndexSourceDocument" /></label>
+                <td>
+                  <label class="small-font">
+                    {{'Waste_Index_Source_Document' | localize }}
+                    <input
+                      type="text"
+                      v-model="w.wasteIndexSourceDocument"
+                    />
+                  </label>
                 </td>
-                <td class="text-right">
+                <td class="text-right small-font">
                   <button
                     class="btn btn-danger waves-effect waves-light"
                     @click.prevent="deleteWasteComposition(idx)"
@@ -424,6 +475,9 @@ export default {
 </script>
 
 <style scoped>
+.small-font {
+  font-size: 0.7rem;
+}
 /* [data-foo]:after {
     content: attr(data-foo);
     background-color: black;
@@ -431,4 +485,8 @@ export default {
     white-space: pre;
     display: inline-block;
 } */
+
+/* td {padding: 2px 5px;}
+td input{margin:0 !important;height:2em !important;}
+td .select-wrapper input.select-dropdown{height:2em;line-height:2em;} */
 </style>

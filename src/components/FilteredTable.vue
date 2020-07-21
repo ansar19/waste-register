@@ -77,6 +77,7 @@ export default {
             placeholder: 'Выберите уровень'
           },
           tdClass: 'text-center',
+          formatFn: this.translateWasteColor
         },
         {
           label: 'Место вывоза',
@@ -146,7 +147,18 @@ export default {
         'Название перевозчика': 'transpoterName',
         Тип: 'typeText',
         Название: 'categoryName',
-        'Уровень опасности': 'wasteColor',
+        'Уровень опасности': {
+          field: 'wasteColor',
+          callback: value => {
+            const map = {
+              amber: 'Янтарный',
+              green: 'Зеленый',
+              red: 'Красный',
+              'na': 'Не применимо'
+            };
+            return `${map[value]}`;
+          }
+        },
         'Название места утилизации': {
           field: 'utilizatorName.title'
           // callback: value => {
@@ -177,7 +189,16 @@ export default {
         return '< 1%'
       }
       return value + '%'
-    }
+    },
+    translateWasteColor(value) { 
+      const map = {
+        amber: 'Янтарный',
+        green: 'Зеленый',
+        red: 'Красный',
+        na: 'Не применимо'
+      };
+      return `${map[value]}`;
+    },
   },
   computed: {
   },
