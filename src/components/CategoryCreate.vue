@@ -166,6 +166,7 @@
                       <option value="amber">A</option>
                       <option value="red">R</option>
                       <option value="green">G</option>
+                      <option value="na">{{'Not_Applicable'| localize}}</option>
                     </select>
                   </label>
                 </td>
