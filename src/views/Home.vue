@@ -9,8 +9,11 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-6">
         <Distribution />
+      </div>
+      <div class="col-lg-6">
+        <DistributionIncome />
       </div>
     </div>
 
@@ -50,6 +53,7 @@
 import Planning from '@/views/Planning'
 import PlanningMoney from '@/views/PlanningMoney'
 import Distribution from '@/components/Distribution'
+import DistributionIncome from '@/components/DistributionIncome'
 import HomeBill from '@/components/HomeBill'
 import HomeCurrency from '@/components/HomeCurrency'
 
@@ -76,7 +80,8 @@ export default {
   components: {
     Planning,
     PlanningMoney,
-    Distribution
+    Distribution,
+    DistributionIncome
     // HomeBill,
     // HomeCurrency
   }

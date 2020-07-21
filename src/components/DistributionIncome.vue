@@ -1,7 +1,8 @@
 <template>
   <div>
     <!-- <div class="page-title"> -->
-      <!-- <h5>{{'Menu_Distribution'|localize}}</h5> -->
+      <h5></h5>
+      <!-- {{'Menu_Distribution'|localize}} -->
       <!-- <h5>{{info.bill.toFixed(2)}} {{'TON' | localize}}</h5> -->
     <!-- </div> -->
 
@@ -14,7 +15,7 @@
 
     <section>
       <div class="history-chart text-center">
-        <p class="text-align-center">{{'Waste_Pie_Title'|localize}}</p>
+        <p class="text-align-center">{{'Waste_Income_Pie_Title'|localize}}</p>
         <div class="chart-container">
           <canvas id="canvas" ref="canvas"></canvas>
         </div>
@@ -29,7 +30,7 @@ import { Doughnut } from 'vue-chartjs'
 import localizeFilter from '@/filters/localize.filter'
 
 export default {
-  name: 'distribution',
+  name: 'distribution-income',
   extends: Doughnut,
   mixins: [paginationMixin],
   metaInfo() {
@@ -92,7 +93,7 @@ export default {
             label: localizeFilter('CostsForCategories'),
             data: categoires.map(c => {
               return this.records.reduce((total, r) => {
-                if (r.categoryId === c.id && r.type === 'outcome') {
+                if (r.categoryId === c.id && r.type === 'income') {
                   total += +r.amount
                 }
                 return total
