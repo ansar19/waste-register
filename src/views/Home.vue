@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'Main_Panel'|localize}}</h3>
+      <h5>{{'Main_Panel'|localize}}</h5>
       <p class="subcomponent-title">{{ companyName }}</p>
       <!-- <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>

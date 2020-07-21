@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'Limit_Panel'|localize}}</h3>
+      <h5>{{'Limit_Panel'|localize}}</h5>
       <p class="subcomponent-title">{{ companyName }}</p>
     </div>
     <div class="row">

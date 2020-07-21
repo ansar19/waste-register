@@ -17,7 +17,7 @@
         <p class="text-align-center">{{'Waste_Pie_Title'|localize}}</p>
 
         <div class="chart-container">
-          <canvas ref="canvas"></canvas>
+          <canvas id="canvas" ref="canvas"></canvas>
         </div>
       </div>
     </section>
@@ -41,8 +41,11 @@ export default {
   data: () => ({
     loading: true,
     currency: null,
-    records: []
+    records: [],
   }),
+  options: {
+      maintainAspectRatio : false
+    },
   async mounted() {
     // this.currency = await this.$store.dispatch('fetchCurrency')
     this.records = await this.$store.dispatch('fetchRecords')
@@ -149,10 +152,13 @@ export default {
 
 <style scoped>
 .chart-container {
-  position: relative;
+  height:100%;
+  /* position: relative;
   text-align: center;
-  margin: 0 auto;
-  max-width: 600px;
-  min-width: 320px;
+  margin: 0 auto; */
+  /* max-width: 600px;
+  min-width: 320px; */
 }
+.canvas { height:100%; }
 </style>
+

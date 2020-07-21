@@ -5,7 +5,7 @@
       <div class="error__content">
       
         <h1> {{'Page_Not_Found'|localize}} </h1>
-        <!-- <h3>Something went wrong!</h3>
+        <!-- <h5>Something went wrong!</h5>
         <p>There was a problem on our end. Please try again later.</p> -->
         <d-button pill>
           <router-link class="text-white" to="/">

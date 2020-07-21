@@ -55,7 +55,7 @@ export default {
           dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
           dateOutputFormat: 'dd-MM-yyyy',
           sortable: true,
-          filterable: true
+          filterable: true,
           // filterOptions: {
           //   enabled: true,
           //   placeholder: 'Дата вывоза',
@@ -66,6 +66,17 @@ export default {
           label: 'Название',
           field: 'categoryName',
           sortable: true
+        },
+        {
+          label: 'Уровень опасности',
+          field: 'wasteColor',
+          sortable: true,
+          filterOptions: {
+            enabled: true,
+            filterDropdownItems: ['amber', 'green', 'red', 'na'],
+            placeholder: 'Выберите уровень'
+          },
+          tdClass: 'text-center',
         },
         {
           label: 'Место вывоза',
@@ -135,6 +146,7 @@ export default {
         'Название перевозчика': 'transpoterName',
         Тип: 'typeText',
         Название: 'categoryName',
+        'Уровень опасности': 'wasteColor',
         'Название места утилизации': {
           field: 'utilizatorName.title'
           // callback: value => {
@@ -166,6 +178,8 @@ export default {
       }
       return value + '%'
     }
+  },
+  computed: {
   },
   components: {
     VueGoodTable

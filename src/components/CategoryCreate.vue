@@ -31,8 +31,8 @@
 
         <div class="input-field">
           <h5>{{ 'Waste_Origin' | localize }}</h5>
-          <table class="responsive-table">
-            <thead>
+          <table class="meta-table">
+            <!-- <thead>
               <tr>
                 <th>
                   <label>{{'Waste_Source' | localize}}</label>
@@ -45,17 +45,17 @@
                 </th>
                 <th></th>
               </tr>
-            </thead>
+            </thead> -->
             <tbody>
               <tr class="item" v-for="(waste, index) in wastesOrigin" :key="index">
-                <td>
-                  <input type="text" v-model="waste.wasteSource" />
+                <td><label>{{'Waste_Source' | localize}}
+                  <input type="text" v-model="waste.wasteSource" /></label>
                 </td>
-                <td>
-                  <input type="text" v-model="waste.processName" />
+                <td><label>{{'Waste_Process_Name' | localize}}
+                  <input type="text" v-model="waste.processName" /></label>
                 </td>
-                <td>
-                  <input type="text" v-model="waste.hazardProperty" />
+                <td><label>{{'Waste_Hazard_Property' | localize}}
+                  <input type="text" v-model="waste.hazardProperty" /></label>
                 </td>
                 <td class="text-right">
                   <button
@@ -81,8 +81,8 @@
 
         <div class="input-field">
           <h5>{{'Waste_Chemical_Composition' | localize }}</h5>
-          <table class="responsive-table">
-            <thead>
+          <table class="meta-table">
+            <!-- <thead>
               <tr>
                 <th>
                   <label>{{'Waste_Component_Name' | localize }}</label>
@@ -107,34 +107,35 @@
                 </th>
                 <th></th>
               </tr>
-            </thead>
+            </thead> -->
             <tbody>
               <tr class="item" v-for="(w, idx) in wastesComposition" :key="idx">
-                <td>
-                  <input type="text" v-model="w.wasteComponentName" />
+                <td><label>{{'Waste_Component_Name' | localize }}
+                  <input type="text" v-model="w.wasteComponentName" /></label>
                 </td>
                 <td>
-                  <input type="number" v-model.number="w.wasteComponentConcentration" />
+                  <label>{{'Waste_Component_Concentration' | localize }}<input type="number" v-model.number="w.wasteComponentConcentration" /></label>
                 </td>
                 <td>
-                  <input type="text" v-model="w.wasteIndexSourceName" />
+                  <label>{{'Waste_Index_Source_Name' | localize }}<input type="text" v-model="w.wasteIndexSourceName" /></label>
                 </td>
-                <td>
-                  <input type="text" v-model="w.wasteIndexSourceValue" />
+                <td> <label>{{'Value_Label' | localize }}
+                  <input type="text" v-model="w.wasteIndexSourceValue" /></label>
                 </td>
-                <td>
+                <td><label>{{'Waste_Level_Label' | localize }}
                   <select v-model="w.hazWasteLevel" class="browser-default">
                     <option value disabled selected>{{ 'Please_Select' | localize }}</option>
                     <option value="amber">A</option>
                     <option value="red">R</option>
                     <option value="green">G</option>
-                  </select>
+                  </select></label>
                 </td>
-                <td>
-                  <input type="number" v-model.number="w.hazWasteLevelValue" />
+               
+                <td><label>{{'Waste_Haz_Waste_Level_Value' | localize }}
+                  <input type="number" v-model.number="w.hazWasteLevelValue" /></label>
                 </td>
-                <td>
-                  <input type="text" v-model="w.wasteIndexSourceDocument" />
+                <td><label>{{'Waste_Index_Source_Document' | localize }}
+                  <input type="text" v-model="w.wasteIndexSourceDocument" /></label>
                 </td>
                 <td class="text-right">
                   <button
@@ -421,3 +422,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* [data-foo]:after {
+    content: attr(data-foo);
+    background-color: black;
+    color: white;
+    white-space: pre;
+    display: inline-block;
+} */
+</style>

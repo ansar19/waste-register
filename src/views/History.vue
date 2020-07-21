@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'History_Title'|localize}}</h3>
+      <h5>{{'History_Title'|localize}}</h5>
       <p class="subcomponent-title">{{ companyName }}</p>
     </div>
 
@@ -68,6 +68,9 @@ export default {
             ...record,
             categoryName: categoires.find(c => c.id === record.categoryId)
               .title,
+            wasteColor: categoires.find(
+              c => c.id === record.categoryId
+            ).wasteColor,
             typeClass: record.type === 'income' ? 'green' : 'orange',
             transpoterName: transporters.find(
               t => t.id === record.transporterId

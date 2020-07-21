@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'ProfileTitle' | localize}}</h3>
+      <h5>{{'ProfileTitle' | localize}}</h5>
     </div>
 
     <form class="form" @submit.prevent="submitHandler">

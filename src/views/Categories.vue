@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>{{'Categories'|localize}}</h3>
+      <h5>{{'Categories'|localize}}</h5>
     </div>
     <section>
       <Loader v-if="loading" />
