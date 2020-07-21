@@ -3,6 +3,19 @@
     <div class="page-title">
       <h5>{{'Menu_Planning'|localize}}</h5>
       <h5>{{info.bill.toFixed(2)}} {{'TON' | localize}}</h5>
+      <div slot="table-actions">
+          <download-excel
+            :data="categories"
+            :fields="json_fields"
+            class="btn-sm btn-info mt-2 mb-2 ml-2 mr-4"
+            worksheet="Wastes"
+            name="actual_wastes.xls"
+            v-tooltip="'Download_Data'"
+          >
+            <span class="material-icons">cloud_download</span>
+            <!-- {{'Download_Data' | localize}} -->
+          </download-excel>
+        </div>
     </div>
 
     <Loader v-if="loading" />
@@ -13,6 +26,7 @@
     </p>
 
     <section v-else>
+
       <div v-for="cat of categories" :key="cat.id">
         <p>
           <strong>{{cat.title}}:</strong>
@@ -47,7 +61,21 @@ export default {
   },
   data: () => ({
     loading: true,
-    categories: []
+    categories: [],
+    // related to excel export
+      json_fields: {
+        'Название': 'title',
+        'Факт. объем, т': 'spend',
+        'Лимит, т': 'limit'
+      },
+      json_meta: [
+        [
+          {
+            key: 'charset',
+            value: 'utf-8'
+          }
+        ]
+      ]
   }),
   computed: {
     ...mapGetters(['info'])
