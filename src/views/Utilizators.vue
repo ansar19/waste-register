@@ -12,7 +12,7 @@
           v-if="utilizators.length"
           :utilizators="utilizators"
           :key="utilizators.length + updateCount"
-          @updated="updateUtilizators"
+          @updated="updateUtilizator"
         />
         <p v-else class="center">{{'NoUtilizators'|localize}}</p>
       </div>
@@ -48,7 +48,7 @@ export default {
     addNewUtilizator(utilizator) {
       this.utilizators.push(utilizator)
     },
-    updateUtilizators(utilizator) {
+    updateUtilizator(utilizator) {
       const idx = this.utilizators.findIndex(u => u.id === utilizator.id)
       this.utilizators[idx].title = utilizator.title
       this.updateCount++

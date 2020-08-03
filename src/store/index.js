@@ -7,6 +7,8 @@ import category from './category'
 import transporter from './transporter'
 import utilizator from './utilizator'
 import record from './record'
+import converter from './converter'
+
 
 Vue.use(Vuex)
 
@@ -33,6 +35,6 @@ export default new Vuex.Store({
     error: s => s.error
   },
   modules: {
-    auth, info, site, category, transporter, utilizator, record
+    auth, info, site, category, transporter, utilizator, record, converter
   }
 })

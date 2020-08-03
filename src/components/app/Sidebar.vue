@@ -27,7 +27,8 @@ export default {
       { title: localizeFilter('Menu_Sites'), url: '/sites' },
       { title: localizeFilter('Menu_Categories'), url: '/categories' },
       { title: localizeFilter('Menu_Transporters'), url: '/transporters' },
-      { title: localizeFilter('Menu_Utilizators'), url: '/utilizators' }
+      { title: localizeFilter('Menu_Utilizators'), url: '/utilizators' },
+      { title: localizeFilter('Menu_Converter'), url: '/converters' }
     ]
   })
 }

@@ -87,6 +87,12 @@ const router = new Router({
       component: () => import('./views/Record.vue')
     },
     {
+      path: '/converters',
+      name: 'converters',
+      meta: {layout: 'main', auth: true},
+      component: () => import('./views/Converters.vue')
+    },
+    {
       path: '/*',
       meta: {layout: 'main', auth: true},
       component: () => import('./views/FourOhFour.vue')
