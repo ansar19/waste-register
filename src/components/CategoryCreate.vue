@@ -94,10 +94,10 @@
 
         <!-- Химический состав отходов и описание опасных свойств их компонентов: -->
 
-        <div class="input-field">
+        <div class="input-field table-responsive">
           <h5>{{'Waste_Chemical_Composition' | localize }}</h5>
-          <table class="meta-table">
-            <!-- <thead>
+          <table class="table ">
+            <thead>
               <tr>
                 <th>
                   <label>{{'Waste_Component_Name' | localize }}</label>
@@ -122,42 +122,37 @@
                 </th>
                 <th></th>
               </tr>
-            </thead>-->
+            </thead>
             <tbody>
               <tr class="item" v-for="(w, idx) in wastesComposition" :key="idx">
                 <td>
-                  <label class="small-font">
-                    {{'Waste_Component_Name' | localize }}
+
                     <input
                       type="text"
                       v-model="w.wasteComponentName"
                     />
-                  </label>
+
                 </td>
                 <td>
-                  <label class="small-font">
-                    {{'Waste_Component_Concentration' | localize }}
+
                     <input type="number" v-model.number="w.wasteComponentConcentration" />
-                  </label>
+
                 </td>
                 <td>
-                  <label class="small-font">
-                    {{'Waste_Index_Source_Name' | localize }}
+
                     <input type="text" v-model="w.wasteIndexSourceName" />
-                  </label>
+
                 </td>
                 <td>
-                  <label class="small-font">
-                    {{'Value_Label' | localize }}
+
                     <input
                       type="text"
                       v-model="w.wasteIndexSourceValue"
                     />
-                  </label>
+
                 </td>
                 <td>
-                  <label class="small-font">
-                    {{'Waste_Level_Label' | localize }}
+
                     <select
                       v-model="w.hazWasteLevel"
                       class="browser-default"
@@ -168,26 +163,23 @@
                       <option value="green">G</option>
                       <option value="na">{{'Not_Applicable'| localize}}</option>
                     </select>
-                  </label>
+
                 </td>
 
                 <td>
-                  <label class="small-font">
-                    {{'Waste_Haz_Waste_Level_Value' | localize }}
+
                     <input
                       type="number"
                       v-model.number="w.hazWasteLevelValue"
                     />
-                  </label>
+
                 </td>
                 <td>
-                  <label class="small-font">
-                    {{'Waste_Index_Source_Document' | localize }}
+
                     <input
                       type="text"
                       v-model="w.wasteIndexSourceDocument"
                     />
-                  </label>
                 </td>
                 <td class="text-right small-font">
                   <button
@@ -211,6 +203,8 @@
             </tbody>
           </table>
         </div>
+
+        
 
         <!-- Рекомендуемый способ переработки отходов -->
         <div class="form-group">
@@ -476,9 +470,9 @@ export default {
 </script>
 
 <style scoped>
-.small-font {
+/* .small-font {
   font-size: 0.7rem;
-}
+} */
 /* [data-foo]:after {
     content: attr(data-foo);
     background-color: black;

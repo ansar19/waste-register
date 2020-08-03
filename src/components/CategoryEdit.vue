@@ -39,7 +39,7 @@
 
         <div class="input-field">
           <h5>{{ 'Waste_Origin' | localize }}</h5>
-          <table class="responsive-table">
+          <table class="table">
             <thead>
               <tr>
                 <th>
@@ -87,9 +87,9 @@
 
         <!-- Химический состав отходов и описание опасных свойств их компонентов: -->
 
-        <div class="input-field">
+        <div class="input-field table-responsive">
           <h5>{{'Waste_Chemical_Composition' | localize }}</h5>
-          <table class="responsive-table">
+          <table class="table">
             <thead>
               <tr>
                 <th>
