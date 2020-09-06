@@ -579,10 +579,40 @@ export default {
           },
         ]
       } else if (this.wasteColor.color === 'na') {
-        var options = [{
-          val: 'na',
-          text: 'не применимо'
-        }]
+        var options = [{ val: "paperAndCardboardPackaging", text: "бумажная и картонная упаковка" },// to-do: 3rd level
+          { val: "plasticPackaging", text: "пластиковая и пластмассовая упаковка" },
+          { val: "glass", text: "стеклотара (стеклобой)" },
+          { val: "woodenPackage", text: "деревянная упаковка" },
+          { val: "metalPackaging", text: "металлическая упаковка" },
+          { val: "otherPackaging", text: "прочие упаковочные материалы" },
+          { val: "paper", text: "бумага" },
+          { val: "cardboard", text: "картон" },
+          { val: "paperAndCardboardCompound", text: "комбинированный (бумага и картон)" },
+          { val: "hardPlastic", text: "твердый пластик" },
+          { val: "softPlastic", text: "мягкий пластик" },
+          { val: "pdpe", text: "полиэтилен низкого давления (ПНД)" },
+          { val: "hpe", text: "полиэтилен высокого давления (ПВД)" },
+          { val: "otherPlasticWaste", text: "прочие отходы пластика" },
+          { val: "bulkyHouseholdEquipment", text: "крупногабаритные бытовое оборудование" },
+          { val: "smallHouseholdEquipment", text: "мелкогабаритные бытовое оборудование" },
+          { val: "iTAndTelecomEquipment", text: "оборудование информационных технологий и телекоммуникаций" },
+          { val: "consumerEquipment", text: "потребительское оборудование" },
+          { val: "lightingEquipment", text: "осветительное оборудование" },
+          { val: "electricalAndElectronicDevices", text: "электрические и электронные приборы" },
+          { val: "otherElectronicAndElectricalWaste", text: "прочие отходы электронного и электрического оборудования" },
+          { val: "largeSizeFurniture", text: "крупногабаритные отходы - мебель" },
+          { val: "largeSizeCeramics ", text: "крупногабаритные отходы - керамика (раковины, унитазы)" },
+          { val: "otherBulkyWaste", text: "прочие крупногабаритные отходы" },
+          { val: "constructionWasteWood", text: "древесные отходы строительства" },
+          { val: "concreteWaste", text: "бой бетонных изделий" },
+          { val: "reinforcedConcreteWaste", text: "бой железобетонных изделий" },
+          { val: "wasteCeramicPipes", text: "бой труб керамических" },
+          { val: "brickWaste", text: "бой кирпича" },
+          { val: "mixedDemolitionWaste", text: "смешанные отходы строительства, сноса зданий и сооружений" },
+          { val: "otherConstructionWaste", text: "прочие строительные отходы" },
+          { val: "disassembledVehicles", text: "автотранспорт, вышедший из эксплуатации - после разборки (корпус)" },
+          { val: "decommissionedVehicle", text: "автотранспорт, вышедший из эксплуатации - не разобранный" },
+          { val: "otherNonHazWaste", text: "другие неопасные отходы" }]
       }
       return options
     },
