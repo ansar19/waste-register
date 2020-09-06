@@ -74,6 +74,8 @@
   "Message_Utilizator_Title": "Enter the name of the disposal site",
   "Precaution_Title": "Precautions to be taken when handling waste",
   "Message_Precaution_Title": "Enter the Necessary Precautions for Waste Handling",
+  "Message_Waste_Type_Title": "Select Waste Color and Type",
+  "Waste_Type": "Waste type",
   "Transportation_Requirements_Title": "Requirement for waste transportation and loading and unloading operations",
   "Emergency_Requirements_Title": "Measures to prevent and eliminate natural and man-made emergencies and their consequences",
   "Additional_Information": "Additional Information",

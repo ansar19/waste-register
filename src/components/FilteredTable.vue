@@ -69,7 +69,7 @@ export default {
         },
         {
           label: 'Уровень опасности',
-          field: 'wasteColor',
+          field: 'wasteColor.color',
           sortable: true,
           filterOptions: {
             enabled: true,
@@ -148,7 +148,7 @@ export default {
         Тип: 'typeText',
         Название: 'categoryName',
         'Уровень опасности': {
-          field: 'wasteColor',
+          field: 'wasteColor.color',
           callback: value => {
             const map = {
               amber: 'Янтарный',

@@ -15,18 +15,11 @@
 
         <div class="form-group">
           <label for="name">{{'Title'|localize}}</label>
-          <input
-            id="name"
-            type="text"
-            v-model="title"
-            :class="{invalid: $v.title.$dirty && !$v.title.required}"
-            class="form-control"
-          />
+          <input id="name" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}"
+            class="form-control" />
 
-          <span
-            v-if="$v.title.$dirty && !$v.title.required"
-            class="helper-text invalid"
-          >{{'Message_CategoryTitle'|localize}}</span>
+          <span v-if="$v.title.$dirty && !$v.title.required"
+            class="helper-text invalid">{{'Message_CategoryTitle'|localize}}</span>
         </div>
 
         <!-- Код отхода -->
@@ -66,10 +59,7 @@
                   <input type="text" v-model="waste.hazardProperty" />
                 </td>
                 <td class="text-right">
-                  <button
-                    class="btn btn-danger waves-effect waves-light"
-                    v-on:click="deleteItem(index)"
-                  >
+                  <button class="btn btn-danger waves-effect waves-light" v-on:click="deleteItem(index)">
                     <i class="material-icons">delete</i>
                   </button>
                 </td>
@@ -146,20 +136,14 @@
                   <input type="text" v-model="w.wasteIndexSourceDocument" />
                 </td>
                 <td class="text-right">
-                  <button
-                    class="btn btn-danger waves-effect waves-light"
-                    @click.prevent="deleteWasteComposition(idx)"
-                  >
+                  <button class="btn btn-danger waves-effect waves-light" @click.prevent="deleteWasteComposition(idx)">
                     <i class="material-icons">delete</i>
                   </button>
                 </td>
               </tr>
               <tr>
                 <td colspan="4">
-                  <button
-                    class="waves-effect waves-light btn-small"
-                    @click.prevent="addWasteComposition"
-                  >
+                  <button class="waves-effect waves-light btn-small" @click.prevent="addWasteComposition">
                     <i class="material-icons">exposure_plus_1</i>
                   </button>
                 </td>
@@ -172,45 +156,27 @@
 
         <div class="form-group">
           <label for="name">{{'Recycling_Type'|localize}}</label>
-          <textarea
-            id="recycling-type"
-            type="text"
-            v-model="recyclingType"
-            :class="{invalid: $v.recyclingType.$dirty && !$v.recyclingType.required}"
-            class="form-control"
-          ></textarea>
+          <textarea id="recycling-type" type="text" v-model="recyclingType"
+            :class="{invalid: $v.recyclingType.$dirty && !$v.recyclingType.required}" class="form-control"></textarea>
 
-          <span
-            v-if="$v.recyclingType.$dirty && !$v.recyclingType.required"
-            class="helper-text invalid"
-          >{{'Message_Recycling_Type_Title'|localize}}</span>
+          <span v-if="$v.recyclingType.$dirty && !$v.recyclingType.required"
+            class="helper-text invalid">{{'Message_Recycling_Type_Title'|localize}}</span>
         </div>
 
         <div class="form-group">
           <label for="precaution-type">{{'Precaution_Title'|localize}}</label>
-          <textarea
-            id="precaution-type"
-            type="textarea"
-            v-model="precaution"
-            :class="{invalid: $v.precaution.$dirty && !$v.precaution.required}"
-            class="form-control"
-          ></textarea>
-          <span
-            v-if="$v.title.$dirty && !$v.precaution.required"
-            class="helper-text invalid"
-          >{{'Message_Precaution_Title'|localize}}</span>
+          <textarea id="precaution-type" type="textarea" v-model="precaution"
+            :class="{invalid: $v.precaution.$dirty && !$v.precaution.required}" class="form-control"></textarea>
+          <span v-if="$v.title.$dirty && !$v.precaution.required"
+            class="helper-text invalid">{{'Message_Precaution_Title'|localize}}</span>
         </div>
 
         <!-- Требование к транспортировке отходов и проведение погрузо-разгрузочных
         работ-->
         <div class="form-group">
           <label for="transportation-requirements">{{'Transportation_Requirements_Title'|localize}}</label>
-          <textarea
-            id="transportation-requirements"
-            type="textarea"
-            v-model="transportationRequirements"
-            class="form-control"
-          ></textarea>
+          <textarea id="transportation-requirements" type="textarea" v-model="transportationRequirements"
+            class="form-control"></textarea>
         </div>
         <!-- END Требование к транспортировке отходов и проведение погрузо-разгрузочных
         работ-->
@@ -219,51 +185,57 @@
         характера и их последствий-->
         <div class="form-group">
           <label for="emergency-requirements">{{'Emergency_Requirements_Title'|localize}}</label>
-          <textarea
-            id="emergency-requirements"
-            type="textarea"
-            v-model="emergency"
-            class="form-control"
-          ></textarea>
+          <textarea id="emergency-requirements" type="textarea" v-model="emergency" class="form-control"></textarea>
         </div>
 
         <!-- Дополнительная информация -->
         <div class="form-group">
           <label for="additional-info">{{'Additional_Information'|localize}}</label>
-          <textarea
-            id="additional-info"
-            type="textarea"
-            v-model="additionalInfo"
-            class="form-control"
-          ></textarea>
+          <textarea id="additional-info" type="textarea" v-model="additionalInfo" class="form-control"></textarea>
         </div>
 
         <!-- waste color -->
         <label>{{'Waste_Color' | localize}}</label>
         <p>
           <label for="red">
-            <input name="group1" type="radio" id="red" value="red" v-model="wasteColor" />
+            <input name="group1" type="radio" id="red" value="red" v-model="wasteColor.color" />
             <span>{{'Red' | localize}}</span>
           </label>
           <br />
           <label for="amber">
-            <input name="group1" type="radio" id="amber" value="amber" v-model="wasteColor" />
+            <input name="group1" type="radio" id="amber" value="amber" v-model="wasteColor.color" />
             <span>{{'Amber' | localize}}</span>
           </label>
           <br />
           <label for="green">
-            <input name="group1" type="radio" id="green" value="green" v-model="wasteColor" />
+            <input name="group1" type="radio" id="green" value="green" v-model="wasteColor.color" />
             <span>{{'Green' | localize}}</span>
           </label>
           <br />
           <label for="na">
-            <input name="group1" type="radio" id="na" value="na" v-model="wasteColor" />
+            <input name="group1" type="radio" id="na" value="na" v-model="wasteColor.color" />
             <span>{{'Not_Applicable' | localize}}</span>
           </label>
           <br />
-
-          <!-- индекс отхода  -->
+          <span v-if="$v.wasteColor.color.$dirty && !$v.wasteColor.color.required"
+            class="helper-text invalid">{{'Message_Waste_Type_Title'|localize}}</span>
         </p>
+
+        <!-- для отчета по инвентаризации отходов -->
+
+        <div class="form-group">
+          <label for="waste-types">{{ 'Waste_Type' | localize}}</label>
+          <select v-model="wasteColor.wasteType" v-if="wasteColor.color" class="browser-default">
+            <option id="waste-types" v-for="(option, id) in setOptions" v-bind:value="option.val" v-bind:key="id">
+              {{option.text}}</option>
+          </select>
+
+          <br />
+
+        </div>
+
+        <!-- индекс отхода  -->
+
         <div class="form-group">
           <label for="waste-index">{{'Waste_Index'|localize}}</label>
           <input id="waste-index" type="text" v-model="wasteIndex" class="form-control" />
@@ -275,34 +247,20 @@
 
         <div class="form-group">
           <label for="limit">{{'Limit'|localize}}</label>
-          <input
-            id="limit"
-            type="number"
-            v-model.number="limit"
-            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
-            class="form-control"
-          />
-          <span
-            v-if="$v.limit.$dirty && !$v.limit.minValue"
-            class="helper-text invalid"
-          >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
+          <input id="limit" type="number" v-model.number="limit"
+            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}" class="form-control" />
+          <span v-if="$v.limit.$dirty && !$v.limit.minValue"
+            class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
 
         <!-- Limit KZT -->
 
         <div class="form-group">
           <label for="limit-kzt">{{'Limit_KZT'|localize}}</label>
-          <input
-            id="limit-kzt"
-            type="number"
-            v-model.number="limitKZT"
-            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
-            class="form-control"
-          />
-          <span
-            v-if="$v.limitKZT.$dirty && !$v.limitKZT.minValue"
-            class="helper-text invalid"
-          >{{'Message_MinLength'|localize}} {{$v.limitKZT.$params.minValue.min}}</span>
+          <input id="limit-kzt" type="number" v-model.number="limitKZT"
+            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}" class="form-control" />
+          <span v-if="$v.limitKZT.$dirty && !$v.limitKZT.minValue"
+            class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limitKZT.$params.minValue.min}}</span>
         </div>
 
         <button class="btn btn-success waves-effect waves-light" type="submit">
@@ -315,7 +273,10 @@
 </template>
 
 <script>
-import { required, minValue } from 'vuelidate/lib/validators'
+import {
+  required,
+  minValue
+} from 'vuelidate/lib/validators'
 import localizeFilter from '@/filters/localize.filter'
 export default {
   props: {
@@ -328,19 +289,24 @@ export default {
     select: null,
     title: '',
     wasteCode: '',
-    wasteColor: '',
-    wastesOrigin: [{ wasteSource: '', processName: '', hazardProperty: '' }],
-    wastesComposition: [
-      {
-        wasteComponentName: '',
-        wasteComponentConcentration: '',
-        wasteIndexSourceName: '',
-        wasteIndexSourceValue: '',
-        hazWasteLevel: '',
-        hazWasteLevelValue: '',
-        wasteIndexSourceDocument: ''
-      }
-    ],
+    wasteColor: {
+      color: undefined,
+      wasteType: undefined
+    },
+    wastesOrigin: [{
+      wasteSource: '',
+      processName: '',
+      hazardProperty: ''
+    }],
+    wastesComposition: [{
+      wasteComponentName: '',
+      wasteComponentConcentration: '',
+      wasteIndexSourceName: '',
+      wasteIndexSourceValue: '',
+      hazWasteLevel: '',
+      hazWasteLevelValue: '',
+      wasteIndexSourceDocument: ''
+    }],
     recyclingType: '',
     precaution: '',
     transportationRequirements: '',
@@ -352,11 +318,26 @@ export default {
     current: null
   }),
   validations: {
-    title: { required },
-    recyclingType: { required },
-    precaution: { required },
-    limit: { minValue: minValue(1) },
-    limitKZT: { minValue: minValue(1) }
+    title: {
+      required
+    },
+    wasteColor: {
+      color: {
+        required
+      }
+    },
+    recyclingType: {
+      required
+    },
+    precaution: {
+      required
+    },
+    limit: {
+      minValue: minValue(1)
+    },
+    limitKZT: {
+      minValue: minValue(1)
+    }
   },
   watch: {
     current(catId) {
@@ -385,8 +366,8 @@ export default {
       this.transportationRequirements = transportationRequirements
       this.emergency = emergency
       this.additionalInfo = additionalInfo
-      this.wasteIndex = wasteIndex
-      ;(this.limit = limit), (this.limitKZT = limitKZT)
+      this.wasteIndex = wasteIndex;
+      (this.limit = limit), (this.limitKZT = limitKZT)
     }
   },
   created() {
@@ -417,8 +398,194 @@ export default {
     this.transportationRequirements = transportationRequirements
     this.emergency = emergency
     this.additionalInfo = additionalInfo
-    this.wasteIndex = wasteIndex
-    ;(this.limit = limit), (this.limitKZT = limitKZT)
+    this.wasteIndex = wasteIndex;
+    (this.limit = limit), (this.limitKZT = limitKZT)
+  },
+  computed: {
+    setOptions() {
+      if (this.wasteColor.color === 'red') {
+        var options = [{
+            val: 'otherRedWaste',
+            text: 'прочие опасные отходы красного уровня',
+          },
+          {
+            val: 'polychlorinated',
+            text: 'отходы, содержащие полихлорированный дифенил, полихлорированный терфинил, полибромированный дифенил (а также любые полибромированные аналоги этих соединений)',
+          },
+          {
+            val: 'asbest',
+            text: 'асбест и любые отходы со схожими с асбестом характеристиками',
+          },
+          {
+            val: 'dibenzofuran',
+            text: 'любое соединение, родственное полихлорированному дибензофурану',
+          },
+          {
+            val: 'dibenzodioxin',
+            text: 'любое соединение, родственное полихлорированному дибензодиоксину',
+          },
+          {
+            val: 'antiDenotationAdditivesAddedLead',
+            text: 'шламы антиденотационных присадок с добавлением свинца',
+          },
+
+          {
+            val: 'peroxide',
+            text: 'перекиси (кроме перекиси водорода)',
+          },
+        ]
+      } else if (this.wasteColor.color === 'amber') {
+        var options = [{
+            val: 'mercuryWaste',
+            text: 'отходы, содержащие ртуть'
+          },
+          {
+            val: 'mercuryLamps',
+            text: 'включая ртутьсодержащие лампы'
+          }, // TO-DO: 3rd level dropdown
+          {
+            val: 'arsenicWaste',
+            text: 'отходы, содержащие мышьяк'
+          },
+          {
+            val: 'hexavalentChromium',
+            text: 'отходы, содержащие хром шестивалентный',
+          },
+          {
+            val: 'leadWaste',
+            text: 'отходы, содержащие свинец'
+          },
+          {
+            val: 'zincWaste',
+            text: 'отходы, содержащие цинк'
+          },
+          {
+            val: 'usedBatteries',
+            text: 'отработанные аккумуляторы, целые или разломанные',
+          },
+          {
+            val: 'cyanideWaste',
+            text: 'отходы, содержащие цианиды'
+          },
+          {
+            val: 'industrialSludge',
+            text: 'иловый осадок промышленных предприятий',
+          },
+          {
+            val: 'bottomResidues',
+            text: 'кубовые остатки'
+          },
+          {
+            val: 'galvanicWaste',
+            text: 'отходы гальванических производств'
+          },
+          {
+            val: 'phosphoricSlags',
+            text: 'шлаки фосфорные'
+          },
+          {
+            val: 'pesticidesToxicChemicals',
+            text: 'пестициды, ядохимикаты'
+          },
+          {
+            val: 'usedOil',
+            text: 'отработанные масла'
+          },
+          {
+            val: 'paintWaste',
+            text: 'отходы лаков и красок'
+          },
+          {
+            val: 'cuttingOilsAndCoolants',
+            text: 'смазочно-охлаждающие жидкости',
+          },
+          {
+            val: 'crudeOilAndOilProductsWaste',
+            text: 'отходы сырой нефти, нефтепродуктов',
+          },
+          {
+            val: 'oilAndChemicalsContaminatedSoil',
+            text: 'грунты, пропитанные нефтью, мазутом, химикатами',
+          },
+          {
+            val: 'oilSludge',
+            text: 'нефтешламы'
+          },
+          {
+            val: 'drillCuttings',
+            text: 'отработанный буровой шлам'
+          },
+          {
+            val: 'porkSlurry',
+            text: 'свиная жижа'
+          },
+          {
+            val: 'otherAmberWaste',
+            text: 'прочие опасные отходы янтарного уровня',
+          },
+        ]
+      } else if (this.wasteColor.color === 'green') {
+        var options = [{
+            val: 'chromiumScrap',
+            text: 'отходы и лом хрома'
+          },
+          {
+            val: 'cadmiumScrap',
+            text: 'отходы и лом кадмия'
+          },
+          {
+            val: 'aluminumScrap',
+            text: 'отходы и лом алюминия'
+          },
+          {
+            val: 'copperScrap',
+            text: 'отходы и лом меди'
+          },
+          {
+            val: 'leadScrap',
+            text: 'отходы и лом свинца'
+          },
+          {
+            val: 'zincScrap',
+            text: 'отходы и лом цинка'
+          },
+          {
+            val: 'manganeseScrap',
+            text: 'отходы и лом марганца'
+          },
+          {
+            val: 'plasticAndPolyethyleneWaste',
+            text: 'отходы пластмассы, полиэтилена',
+          },
+          {
+            val: 'abrasiveWaste',
+            text: 'отходы абразива'
+          },
+          {
+            val: 'usedTiresAndRubberWaste',
+            text: 'использованные шины и другие резиновые отходы',
+          },
+          {
+            val: 'ashesAndSlags',
+            text: 'зола и золошлаковые отходы'
+          },
+          {
+            val: 'birdDung',
+            text: 'птичий помет (навоз)'
+          },
+          {
+            val: 'otherGreenWaste',
+            text: 'прочие опасные отходы зеленого уровня',
+          },
+        ]
+      } else if (this.wasteColor.color === 'na') {
+        var options = [{
+          val: 'na',
+          text: 'не применимо'
+        }]
+      }
+      return options
+    },
   },
   methods: {
     async submitHandler() {
