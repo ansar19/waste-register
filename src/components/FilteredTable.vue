@@ -164,6 +164,9 @@ export default {
           // callback: value => {
           //   return `Landline Phone - ${value}`
           // }
+        },
+        'Контактный телефон места утилизации': {
+          field: 'utilizatorName.utilizatorPhone'
         }
       },
       json_meta: [
