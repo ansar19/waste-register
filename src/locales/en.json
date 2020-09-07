@@ -13,6 +13,7 @@
   "Message_EnterName": "Enter name",
   "Update": "Update",
   "Create": "Create",
+  "Save": "Save",
   "Main_Panel": "Main Panel",
   "Limit_Panel": "Limit Panel",
   "Bill": "Bill",
@@ -177,5 +178,15 @@
   "Green": "Green",
   "Not_Applicable": "Not applicable",
   "Waste_Color": "Waste Color",
-  "Haz_Waste_Passport": "Hazardous waste passport"
+  "Haz_Waste_Passport": "Hazardous waste passport",
+  "Coefficient_List_Editor": "Coefficient List Editor",
+  "Waste_Name_And_UOM": "Name of the waste and unit of measurement",
+  "Conversion_Factor_To_Tons": "Conversion factor to tons",
+  "Enter_Number_To_Calculate": "Enter the number to calculate",
+  "Enter_Number": "Enter the number",
+  "Select_Option_To_Convert": "Select an option to convert",
+  "Conversion_Result": "Conversion result",
+  "Coefficient_List": "Coefficient list"
+
+
 }

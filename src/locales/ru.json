@@ -13,6 +13,7 @@
   "Message_Enter_Company_Email": "Введите email компании в правильном формате",
   "Update": "Обновить",
   "Create": "Создать",
+  "Save": "Сохранить",
   "Main_Panel": "Главная панель",
   "Limit_Panel": "Панель лимитов",
   "Name": "ФИО",
@@ -175,5 +176,16 @@
   "Green": "Зеленый",
   "Not_Applicable": "Не применимо",
   "Waste_Color": "Цвет отхода",
-  "Haz_Waste_Passport": "Паспорт опасных отходов"
+  "Haz_Waste_Passport": "Паспорт опасных отходов",
+  "Coefficient_List_Editor": "Редактор списка коэффициентов",
+  "Waste_Name_And_UOM": "Название отхода и единица измерения",
+  "Conversion_Factor_To_Tons": "Коэффициент для перевода в тонны",
+  "Enter_Number_To_Calculate": "Введите число для расчета",
+  "Enter_Number": "Введите число",
+  "Select_Option_To_Convert": "Выберите параметр для конвертацииt",
+  "Conversion_Result": "Результат перевода",
+  "Coefficient_List": "Список коэффициентов"
+
+
+
 }

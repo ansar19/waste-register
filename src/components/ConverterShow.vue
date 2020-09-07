@@ -5,7 +5,7 @@
       <!-- <h5>Простой конвертер отходов в тонны</h5> -->
       <form>
         <div class="form-group">
-          <label for="inputConverterValue">Введите число для перевода:</label>
+          <label for="inputConverterValue">{{'Enter_Number_To_Calculate'| localize }}:</label>
           <input
             type="number"
             class="form-control"
@@ -13,13 +13,13 @@
             id="inputConverterValue"
             aria-describedby="inputConverterHelp"
           />
-          <small id="inputConverterHelp" class="form-text text-muted">Введите число для перевода.</small>
+          <small id="inputConverterHelp" class="form-text text-muted">{{'Enter_Number' | localize }}</small>
         </div>
         <div class="form-group">
         <select ref="siteSelect" v-model="current" class="form-control-custom">
             <option v-for="c of unitOfMeasurements" :key="c.id" :value="c.id">{{c.name}}</option>
           </select>
-          <label for="formControlSelect">Выберите параметр для конвертации:</label>
+          <label for="formControlSelect">{{'Select_Option_To_Convert' | localize}}:</label>
           <select v-model="selectedCoef" class="custom-select" id="formControlSelect">
             <option
               v-for="(unitOfMeasurement, index) in unitOfMeasurements"
@@ -32,15 +32,15 @@
       <div
         class="alert alert-primary"
         role="alert"
-      >Результат перевода: {{wasteToTon.toFixed(3)}} тонн</div>
+      >{{ 'Conversion_Result' | localize }}: {{wasteToTon.toFixed(3)}} {{'TON' | localize }}</div>
       <br />
       <div class="table-responsive">
         <table class="table table-stripped table-hover" >
-          <caption class="caption-top">Список коэффициентов</caption>
+          <caption class="caption-top">{{'Coefficient_List' | localize}}</caption>
           <thead>
             <tr class="bg-primary text-white">
-              <th>Название отхода и единица измерения</th>
-              <th>Коэффициент для перевода в тонны</th>
+              <th>{{'Waste_Name_And_UOM' | localize}}</th>
+              <th>{{'Conversion_Factor_To_Tons' | localize}}</th>
             </tr>
           </thead>
           <tbody>

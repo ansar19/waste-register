@@ -15,11 +15,11 @@
 
           <div class="table-responsive">
             <table class="table table-stripped table-hover">
-              <caption class="caption-top">Редактор списка коэффициентов</caption>
+              <caption class="caption-top">{{'Coefficient_List_Editor'|localize}}</caption>
               <thead>
                 <tr class="bg-primary text-white">
-                  <th>Название отхода и единица измерения</th>
-                  <th>Коэффициент для перевода в тонны</th>
+                  <th>{{'Waste_Name_And_UOM' | localize}}</th>
+                  <th>{{'Conversion_Factor_To_Tons' | localize}}</th>
                   <!-- <th></th> -->
                 </tr>
               </thead>
@@ -43,9 +43,9 @@
               </tbody>
             </table>
           </div>
-          <button type="button" class="btn btn-info" @click="addNewRow">Добавить новый коэф</button>
+          <button type="button" class="btn btn-info" @click="addNewRow">{{'Add_Row_Button'| localize}}</button>
           <button class="btn btn-success waves-effect waves-light" type="submit">
-            {{'Create'|localize}}
+            {{'Save'|localize}}
             <i class="material-icons right">send</i>
           </button>
         </form>

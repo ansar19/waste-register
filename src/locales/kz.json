@@ -13,6 +13,7 @@
   "Message_Enter_Company_Email": "Компанияның электрондық поштасын дұрыс форматта енгізіңіз",
   "Update": "Жаңарту",
   "Create": "Жасау",
+  "Save": "Сақтау",
   "Main_Panel": "Бас панель",
   "Limit_Panel": "Шектеулер панелі",
   "Name": "Аты-жөні",
@@ -175,5 +176,18 @@
   "Green": "Жасыл",
   "Not_Applicable": "Қолданылмайды",
   "Waste_Color": "Қалдықтың түсі",
-  "Haz_Waste_Passport": "Қауыпты Қалдықтар Паспорты"
+  "Haz_Waste_Passport": "Қауыпты Қалдықтар Паспорты",
+  "Coefficient_List_Editor": "Коэффициенттер тізімінің редакторы",
+  "Waste_Name_And_UOM": "Қалдықтардың атауы және бірлігі",
+  "Conversion_Factor_To_Tons": "Тоннаға аудару коэф-ті",
+  "Enter_Number_To_Calculate": "Есептеу үшін сан енгізіңіз",
+  "Enter_Number": "Сан енгізіңіз",
+  "Select_Option_To_Convert": "Аудару опциясын таңдаңыз",
+  "Conversion_Result": "Аудару нәтижесі",
+  "Coefficient_List": "Коэффициенттер тізімі"
+
+
+
+
+
 }
