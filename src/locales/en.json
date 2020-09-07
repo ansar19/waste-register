@@ -186,7 +186,12 @@
   "Enter_Number": "Enter the number",
   "Select_Option_To_Convert": "Select an option to convert",
   "Conversion_Result": "Conversion result",
-  "Coefficient_List": "Coefficient list"
+  "Coefficient_List": "Coefficient list",
+  "Waste_Aggregate_State": "Aggregate state of waste",
+  "Solid": "Solid",
+  "Liquid": "Liquid",
+  "Pasty": "Pasty",
+  "Message_Waste_Aggregate_State": "Check the Aggregate state of waste"
 
 
 }

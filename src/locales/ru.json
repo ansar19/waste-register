@@ -184,8 +184,11 @@
   "Enter_Number": "Введите число",
   "Select_Option_To_Convert": "Выберите параметр для конвертацииt",
   "Conversion_Result": "Результат перевода",
-  "Coefficient_List": "Список коэффициентов"
-
-
+  "Coefficient_List": "Список коэффициентов",
+  "Waste_Aggregate_State": "Агрегатное состояние отхода",
+  "Solid": "Твердые",
+  "Liquid": "Жидкие",
+  "Pasty": "Пастообразные",
+  "Message_Waste_Aggregate_State": "Отметьте Агрегатное состояние отхода"
 
 }

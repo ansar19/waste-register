@@ -20,6 +20,30 @@
           <input id="waste-code" type="text" v-model="wasteCode" class="form-control" />
         </div>
 
+        <!-- Агрегатное состояние отходов -->
+        <div class="from-group">
+          <label>{{'Waste_Aggregate_State' | localize}}</label>
+          <p>
+            <label for="solid">
+              <input name="group2" type="radio" id="solid" value="solid" v-model="wasteAggregateState" />
+              <span>{{'Solid' | localize}}</span>
+            </label>
+            <br />
+            <label for="liquid">
+              <input name="group2" type="radio" id="liquid" value="liquid" v-model="wasteAggregateState" />
+              <span>{{'Liquid' | localize}}</span>
+            </label>
+            <br />
+            <label for="pasty">
+              <input name="group2" type="radio" id="pasty" value="pasty" v-model="wasteAggregateState" />
+              <span>{{'Pasty' | localize}}</span>
+            </label>
+            <br />
+            <span v-if="$v.wasteAggregateState.$dirty && !$v.wasteAggregateState.required"
+              class="helper-text invalid">{{'Message_Waste_Aggregate_State'|localize}}</span>
+          </p>
+        </div>
+
         <!-- Происхождение отходов -->
 
         <div class="input-field">
@@ -218,13 +242,13 @@
             <input name="group1" type="radio" id="four" value="na" v-model="wasteColor.color" />
             <span>{{'Not_Applicable' | localize}}</span>
           </label>
+          <br />
           <span v-if="$v.wasteColor.color.$dirty && !$v.wasteColor.color.required"
             class="helper-text invalid">{{'Message_Waste_Type_Title'|localize}}</span>
-          <br />
-          </p>
+        </p>
 
-          <!-- для отчета по инвентаризации отходов -->
-        
+        <!-- для отчета по инвентаризации отходов -->
+
         <div class="form-group">
           <label for="waste-types">{{ 'Waste_Type' | localize}}</label>
           <select v-model="wasteColor.wasteType" v-if="wasteColor.color" class="browser-default">
@@ -232,7 +256,6 @@
               {{option.text}}</option>
           </select>
           <br />
-
         </div>
 
         <!-- индекс отхода  -->
@@ -250,7 +273,6 @@
           <label for="limit">{{'Limit'|localize}}</label>
           <input id="limit" type="number" v-model.number="limit"
             :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}" class="form-control" />
-
           <span v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
@@ -261,11 +283,9 @@
           <label for="limitKZT">{{'Limit_KZT'|localize}}</label>
           <input id="limitKZT" type="number" v-model.number="limitKZT"
             :class="{invalid: $v.limitKZT.$dirty && !$v.limitKZT.minValue}" class="form-control" />
-
           <span v-if="$v.limitKZT.$dirty && !$v.limitKZT.minValue"
             class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
-
         <button class="btn btn-success waves-effect waves-light mb-4" type="submit">
           {{'Create'|localize}}
           <i class="material-icons right">send</i>
@@ -290,6 +310,7 @@ export default {
       color: undefined,
       wasteType: undefined
     },
+    wasteAggregateState: '',
     wastesOrigin: [{
       wasteSource: '',
       processName: '',
@@ -316,6 +337,9 @@ export default {
   validations: {
     title: {
       required
+    },
+    wasteAggregateState: { 
+      required 
     },
     wasteColor: {
       color: {
@@ -565,6 +589,7 @@ export default {
         const category = await this.$store.dispatch('createCategory', {
           title: this.title,
           wasteCode: this.wasteCode,
+          wasteAggregateState: this.wasteAggregateState,
           wasteColor: this.wasteColor,
           wastesOrigin: this.wastesOrigin,
           wastesComposition: this.wastesComposition,
@@ -579,6 +604,7 @@ export default {
         })
         this.title = ''
         this.wasteCode = ''
+        this.wasteAggregateState = ''
         this.wasteColor = {}
         this.wastesOrigin = []
         this.wastesComposition = []

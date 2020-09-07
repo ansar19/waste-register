@@ -28,6 +28,28 @@
           <input id="waste-code" type="text" v-model="wasteCode" class="form-control" />
         </div>
 
+        <!-- Агрегатное состояние отходов -->
+        <div class="from-group">
+          <label>{{'Waste_Aggregate_State' | localize}}</label>
+          <p>
+            <label for="solid">
+              <input name="group2" type="radio" id="solid" value="solid" v-model="wasteAggregateState" />
+              <span>{{'Solid' | localize}}</span>
+            </label>
+            <br />
+            <label for="liquid">
+              <input name="group2" type="radio" id="liquid" value="liquid" v-model="wasteAggregateState" />
+              <span>{{'Liquid' | localize}}</span>
+            </label>
+            <br />
+            <label for="pasty">
+              <input name="group2" type="radio" id="pasty" value="pasty" v-model="wasteAggregateState" />
+              <span>{{'Pasty' | localize}}</span>
+            </label>
+            <br />
+          </p>
+        </div>
+
         <!-- Происхождение отходов -->
 
         <div class="input-field">
@@ -293,6 +315,7 @@ export default {
       color: undefined,
       wasteType: undefined
     },
+    wasteAggregateState: '',
     wastesOrigin: [{
       wasteSource: '',
       processName: '',
@@ -345,6 +368,7 @@ export default {
         title,
         wasteCode,
         wasteColor,
+        wasteAggregateState,
         wastesOrigin,
         wastesComposition,
         recyclingType,
@@ -359,6 +383,7 @@ export default {
       this.title = title
       this.wasteCode = wasteCode
       this.wasteColor = wasteColor
+      this.wasteAggregateState = wasteAggregateState
       this.wastesOrigin = wastesOrigin
       this.wastesComposition = wastesComposition
       this.recyclingType = recyclingType
@@ -376,6 +401,7 @@ export default {
       title,
       wasteCode,
       wasteColor,
+      wasteAggregateState,
       wastesOrigin,
       wastesComposition,
       recyclingType,
@@ -391,6 +417,7 @@ export default {
     this.title = title
     this.wasteCode = wasteCode
     this.wasteColor = wasteColor
+    this.wasteAggregateState = wasteAggregateState
     this.wastesOrigin = wastesOrigin
     this.wastesComposition = wastesComposition
     this.recyclingType = recyclingType
@@ -630,6 +657,7 @@ export default {
           title: this.title,
           wasteCode: this.wasteCode,
           wasteColor: this.wasteColor,
+          wasteAggregateState: this.wasteAggregateState,
           wastesOrigin: this.wastesOrigin,
           wastesComposition: this.wastesComposition,
           recyclingType: this.recyclingType,
