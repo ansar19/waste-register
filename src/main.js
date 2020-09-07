@@ -15,6 +15,10 @@ import Loader from '@/components/app/Loader'
 import './registerServiceWorker'
 // import VTooltip from 'v-tooltip'
 
+import vSelect from 'vue-select'
+
+Vue.component('v-select', vSelect)
+
 import Popper from 'popper.js'
 Popper.Defaults.modifiers.computeStyle.gpuAcceleration = false
 

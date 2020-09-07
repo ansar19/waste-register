@@ -27,12 +27,16 @@
     </p>
 
     <form class="form" v-else @submit.prevent="handleSubmit">
+
+      <!-- Участок -->
       <div class="from-group">
         <label for="choose-site">{{'SelectSite'|localize}}</label>
         <select ref="selectSite" v-model="site" class="form-control-custom" id="choose-site">
           <option v-for="s in sites" :key="s.id" :value="s.id">{{s.siteName}}</option>
         </select>
       </div>
+
+      <!-- Отход -->
 
       <div class="from-group">
         <label for="choose-waste">{{'SelectCategory'|localize}}</label>
@@ -41,59 +45,51 @@
         </select>
       </div>
 
+      <!-- Перевозчик -->
+
       <div class="from-group">
         <label for="choose-transporter">{{'SelectTransporter'|localize}}</label>
-        <select
-          ref="select2"
-          v-model="transporter"
-          class="form-control-custom"
-          id="choose-transporter"
-        >
+        <select ref="select2" v-model="transporter" class="form-control-custom" id="choose-transporter">
           <option v-for="t in transporters" :key="t.id" :value="t.id">{{t.title}}</option>
         </select>
       </div>
 
+      <!-- Место утилизации -->
+
       <div class="from-group">
         <label for="choose-utilizator">{{'SelectUtilizator'|localize}}</label>
-        <select
-          ref="select3"
-          v-model="utilizator"
-          class="form-control-custom"
-          id="choose-utilizator"
-        >
+        <select ref="select3" v-model="utilizator" class="form-control-custom" id="choose-utilizator">
           <option v-for="u in utilizators" :key="u.id" :value="u.id">{{u.title}}</option>
         </select>
       </div>
 
+      <!-- Способ утилизации -->
+
+      <div class="from-group">
+        <label for="sel">{{ 'Select_Utilization_Way' | localize }}</label>
+        <v-select v-model="utilizationWay" label="text" :options="utilizationWayOptions"
+          :reduce="option => option.value"></v-select>
+      </div>
+
+      <!-- Принято или отправлено -->
+
       <fieldset>
         <div class="custom-control custom-radio d-block my-2">
-          <input
-            id="in"
-            class="custom-control-input"
-            name="in"
-            type="radio"
-            value="income"
-            v-model="type"
-          />
+          <input id="in" class="custom-control-input" name="in" type="radio" value="income" v-model="type" />
           <label class="custom-control-label" for="in">
             <span>{{'Income'|localize}}</span>
           </label>
         </div>
 
         <div class="custom-control custom-radio d-block my-2">
-          <input
-            id="out"
-            class="custom-control-input"
-            name="out"
-            type="radio"
-            value="outcome"
-            v-model="type"
-          />
+          <input id="out" class="custom-control-input" name="out" type="radio" value="outcome" v-model="type" />
           <label class="custom-control-label" for="out">
             <span>{{'Outcome'|localize}}</span>
           </label>
         </div>
       </fieldset>
+
+      <!-- Дата -->
 
       <div class="from-group">
         <!-- <div>Opened: <span :class="[opened ? 'text-success' : 'text-danger']">{{ opened }}</span></div> -->
@@ -102,34 +98,23 @@
         <d-datepicker v-model="removalDate" :language="ru" />
       </div>
 
-      <!-- decimal number -->
+      <!-- decimal number - масса отходов -->
       <div class="from-group">
         <label for="amount">{{'Amount'|localize}}</label>
-        <input
-          id="amount"
-          type="text"
-          v-model.number="amount"
-          :class="{invalid: $v.amount.$dirty && !$v.amount.$decimal &&!!$v.amount.minValue}"
-          class="from-control"
-        />
-        <span
-          v-if="$v.amount.$dirty &&  !$v.amount.$decimal && !$v.amount.$minValue"
-          class="helper-text invalid"
-        >{{'Message_MinLength'|localize}} {{$v.amount.$params.minValue.min}}</span>
+        <input id="amount" type="text" v-model.number="amount"
+          :class="{invalid: $v.amount.$dirty && !$v.amount.$decimal &&!!$v.amount.minValue}" class="from-control" />
+        <span v-if="$v.amount.$dirty &&  !$v.amount.$decimal && !$v.amount.$minValue"
+          class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.amount.$params.minValue.min}}</span>
       </div>
+
+      <!-- Описание / комментарий -->
 
       <div class="form-group">
         <label for="description">{{'Description'|localize}}</label>
-        <input
-          id="description"
-          type="text"
-          v-model="description"
-          :class="{invalid: $v.description.$dirty && !$v.description.required}"
-        />
-        <span
-          v-if="$v.description.$dirty && !$v.description.required"
-          class="helper-text invalid"
-        >{{'Message_EnterDescription'|localize}}</span>
+        <input id="description" type="text" v-model="description"
+          :class="{invalid: $v.description.$dirty && !$v.description.required}" />
+        <span v-if="$v.description.$dirty && !$v.description.required"
+          class="helper-text invalid">{{'Message_EnterDescription'|localize}}</span>
       </div>
 
       <button class="btn btn-success waves-effect waves-light" type="submit">
@@ -141,12 +126,24 @@
 </template>
 
 <script>
-import { en, ru } from 'vuejs-datepicker/dist/locale'
+import {
+  en,
+  ru
+} from 'vuejs-datepicker/dist/locale'
 
-import { required, decimal, minValue } from 'vuelidate/lib/validators'
+import {
+  required,
+  decimal,
+  minValue
+} from 'vuelidate/lib/validators'
 
-import { mapGetters } from 'vuex'
+import {
+  mapGetters
+} from 'vuex'
 import localizeFilter from '@/filters/localize.filter'
+
+import 'vue-select/dist/vue-select.css';
+
 
 export default {
   name: 'record',
@@ -175,7 +172,19 @@ export default {
     removalDate: new Date(),
     opened: false,
     amount: 0.001,
-    description: ''
+    description: '',
+    utilizationWay: null,
+    utilizationWayOptions: [
+      { text: 'Передано сторонним организациям, предприятиям', value: 'transferredTo3rdParties' },
+      { text: 'Переработка, повторное использование для получения продукции', value: 'recyclingReuse' },
+      { text: 'Инсинерация (сжигание) с извлечением энергии на предприятии', value: 'incinerationWithEnergyRecovery' },
+      { text: 'Инсинерация (сжигание) без извлечения энергии на предприятии', value: 'incinerationWithOutEnergyRecovery' },
+      { text: 'Полное обезвреживание на предприятии', value: 'fullNeutralizationAtCompany' },
+      { text: 'Частичное обезвреживание на предприятии', value: 'partialNeutralizationAtCompany' },
+      { text: 'Хранение на собственных объектах размещения отходов', value: 'storageAtOwnWasteFacilities' },
+      { text: 'Захоронение на собственных объектах размещения отходов', value: 'dumpingAtOwnWasteFacilities' },
+      { text: 'Размещение на собственном полигоне ТБО', value: 'disposalAtOwnSolidDomesticLlandfill' }
+    ]
   }),
   validations: {
     amount: {
@@ -245,6 +254,7 @@ export default {
             categoryId: this.category,
             transporterId: this.transporter,
             utilizatorId: this.utilizator,
+            utilizationWay: this.utilizationWay,
             amount: this.amount,
             removalDate: this.removalDate.toJSON(),
             description: this.description,
@@ -252,9 +262,9 @@ export default {
             date: new Date().toJSON()
           })
           const bill =
-            this.type === 'income'
-              ? this.info.bill + this.amount
-              : this.info.bill - this.amount
+            this.type === 'income' ?
+            this.info.bill + this.amount :
+            this.info.bill - this.amount
 
           await this.$store.dispatch('updateInfo', {
             bill

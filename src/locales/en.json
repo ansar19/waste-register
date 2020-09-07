@@ -191,7 +191,6 @@
   "Solid": "Solid",
   "Liquid": "Liquid",
   "Pasty": "Pasty",
-  "Message_Waste_Aggregate_State": "Check the Aggregate state of waste"
-
-
+  "Message_Waste_Aggregate_State": "Check the Aggregate state of waste",
+  "Select_Utilization_Way": "Select Utilization Way"
 }

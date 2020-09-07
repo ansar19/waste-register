@@ -189,6 +189,7 @@
   "Solid": "Твердые",
   "Liquid": "Жидкие",
   "Pasty": "Пастообразные",
-  "Message_Waste_Aggregate_State": "Отметьте Агрегатное состояние отхода"
+  "Message_Waste_Aggregate_State": "Отметьте Агрегатное состояние отхода",
+  "Select_Utilization_Way": "Выберите способ утилизации"
 
 }
