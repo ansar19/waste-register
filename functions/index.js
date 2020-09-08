@@ -18,7 +18,7 @@ admin.initializeApp()
 
 let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
-    port: 465,
+    port: 465, 
     secure: true,
     auth: {
         type: 'OAuth2',
@@ -28,7 +28,9 @@ let transporter = nodemailer.createTransport({
         refreshToken: process.env.REFRESH_TOKEN,
         privateKey: process.env.PRIVATE_KEY,
         accessToken: process.env.ACCESS_TOKEN,
-        expires: 1484314697598
+        expires: 1484314697598,
+        email: process.env.EMAIL,
+        password: process.env.PASSWORD
     }
 });
 
