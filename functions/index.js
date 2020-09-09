@@ -18,26 +18,22 @@ admin.initializeApp()
 
 // create reusable transporter object using the default SMTP transport
 
-
-
 let transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587, 
-    secure: false, // true for 465, false for other ports
-    // secure: true,
+    host: 'smtp.gmail.com',
+    port: 465, 
+    secure: true,
     auth: {
-        user: 'regan70@ethereal.email',
-        pass: 'jb2afd47b4rx4YVmrB',
-        // type: 'OAuth2',
-        // user: 'ecomarine.test@gmail.com',
-        // clientId: process.env.CLIENT_ID,
-        // clientSecret: process.env.CLIENT_SECRET,
-        // refreshToken: process.env.REFRESH_TOKEN,
-        // privateKey: process.env.PRIVATE_KEY,
-        // accessToken: process.env.ACCESS_TOKEN,
-        // expires: 1484314697598,
-        // email: process.env.EMAIL,
-        // password: process.env.PASSWORD
+        type: 'OAuth2',
+        user: 'ecomarine.test@gmail.com',
+        pass: process.env.CLIENT_ID,
+        clientId: process.env.CLIENT_ID,
+        clientSecret: process.env.CLIENT_SECRET,
+        refreshToken: process.env.REFRESH_TOKEN,
+        privateKey: process.env.PRIVATE_KEY,
+        accessToken: process.env.ACCESS_TOKEN,
+        expires: process.env.EXPIRES,
+        email: process.env.EMAIL,
+        password: process.env.PASSWORD
     }
 });
 
