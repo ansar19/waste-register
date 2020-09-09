@@ -25,16 +25,26 @@ let transporter = nodemailer.createTransport({
     auth: {
         type: 'OAuth2',
         user: 'ecomarine.test@gmail.com',
-        pass: process.env.CLIENT_ID,
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
-        privateKey: process.env.PRIVATE_KEY,
-        accessToken: process.env.ACCESS_TOKEN,
-        expires: process.env.EXPIRES,
-        email: process.env.EMAIL,
-        password: process.env.PASSWORD
+        clientId: '953274739599-edha1395bd3suharmiaa4lt747smecki.apps.googleusercontent.com',
+        clientSecret: '2ZUUcupF71M5FhOJdkB8mt0a',
+        refreshToken: '1//04WBNflWAM4azCgYIARAAGAQSNwF-L9IrnW1A8dS_YJOcqchcIlMkuU2cGnl4qz6XKyyGoF-yQfgxnxEtzQWiXCmD_lqj7YTeqX8',
+        accessToken: 'ya29.a0AfH6SMBtRW2SBnli9UtU3FcxjOGU0HDcM4_5lg26NI2YNVnV_uGdJxq8cRxtIibp18ZRFE3o20YNgHrXcaU-4LwfTXrqm2xd5VWEPEFlx5x8eir3XXiApFGt4hpBeYMDsyoSnuKicHpVNuc1CgC3jquEi4ahGeqileo',
+        expires: '1484314697598'
     }
+
+    // auth: {
+    //     type: 'OAuth2',
+    //     user: 'ecomarine.test@gmail.com',
+    //     pass: process.env.CLIENT_ID,
+    //     clientId: process.env.CLIENT_ID,
+    //     clientSecret: process.env.CLIENT_SECRET,
+    //     refreshToken: process.env.REFRESH_TOKEN,
+    //     privateKey: process.env.PRIVATE_KEY,
+    //     accessToken: process.env.ACCESS_TOKEN,
+    //     expires: process.env.EXPIRES,
+    //     email: process.env.EMAIL,
+    //     password: process.env.PASSWORD
+    // }
 });
 
 
