@@ -16,23 +16,35 @@ admin.initializeApp()
 // This example uses an existing Access Token. 
 // If the token is not accepted or current time is past the expires value, then a new accessToken value is generated using provided service account.
 
+// create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465, 
-    secure: true,
+    host: "smtp.yandex.ru",
+    port: 465,
+    secure: true, // true for 465, false for other ports
     auth: {
-        type: 'OAuth2',
-        user: 'ecomarine.test@gmail.com',
-        clientId: process.env.CLIENT_ID,
-        clientSecret: process.env.CLIENT_SECRET,
-        refreshToken: process.env.REFRESH_TOKEN,
-        privateKey: process.env.PRIVATE_KEY,
-        accessToken: process.env.ACCESS_TOKEN,
-        expires: 1484314697598,
-        email: process.env.EMAIL,
-        password: process.env.PASSWORD
+      user: "ecomarinekz", // generated ethereal user
+      pass: "ecomarine11" // generated ethereal password
     }
-});
+  });
+
+
+// let transporter = nodemailer.createTransport({
+//     host: 'smtp.gmail.com',
+//     port: 465, 
+//     secure: true,
+//     auth: {
+//         type: 'OAuth2',
+//         user: 'ecomarine.test@gmail.com',
+//         clientId: process.env.CLIENT_ID,
+//         clientSecret: process.env.CLIENT_SECRET,
+//         refreshToken: process.env.REFRESH_TOKEN,
+//         privateKey: process.env.PRIVATE_KEY,
+//         accessToken: process.env.ACCESS_TOKEN,
+//         expires: 1484314697598,
+//         email: process.env.EMAIL,
+//         password: process.env.PASSWORD
+//     }
+// });
 
 
 exports.sendMail = functions.database.ref('/users/{userId}/records/{recordId}').onCreate((snapshot, context) => {
