@@ -39,7 +39,6 @@ import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table'
 
 import flatPickr from "flatpickr";
-import { Russian } from "flatpickr/dist/l10n/ru.js"
 
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/material_blue.css";
@@ -64,7 +63,7 @@ export default {
           dateOutputFormat: "dd-MM-yyyy",
           filterOptions: {
             enabled: true,
-            placeholder: "начать фильтрацию",
+            placeholder: "выберите даты",
             filterFn: this.dateRangeFilter
           }
         },
@@ -191,6 +190,26 @@ export default {
       type: Array
     }
   },
+  mounted() {
+    // related to range select - flatpkr
+    let inputs = [
+      'input[placeholder="выберите даты"]',
+      'input[placeholder="Filter Start Date"]',
+      'input[placeholder="Filter Need By Date"]'
+    ];
+    inputs.forEach(function(input) {
+      flatPickr(input, {
+        mode: "range",
+        dateFormat: 'n/j/Y',
+        mode: "range",
+        showMonths: 2,
+        allowInput: true,
+        onOpen: function(selectedDates, dateStr, instance) {
+              instance.setDate(instance.input.value, false);
+          }
+      });
+    });
+  },
   methods: {
     percentageFormatFn: function(value) {
       value = Math.trunc(value * 100)
@@ -208,6 +227,7 @@ export default {
       };
       return `${map[value]}`;
     },
+     // related to range select - flatpkr
     dateRangeFilter(data, filterString) {
       let dateRange = filterString.split("to");
       let startDate = Date.parse(dateRange[0]);
@@ -215,22 +235,6 @@ export default {
       return (data =
         Date.parse(data) >= startDate && Date.parse(data) <= endDate);
     },
-  },
-  computed: {
-  },
-  mounted() {
-    let inputs = [
-      'input[placeholder="начать фильтрацию"]',
-      'input[placeholder="Filter Start Date"]',
-      'input[placeholder="Filter Need By Date"]'
-    ];
-    inputs.forEach(function(input) {
-      flatPickr(input, {
-        dateFormat: "m-d-Y",
-        mode: "range",
-        allowInput: true
-      });
-    });
   },
   components: {
     VueGoodTable,
