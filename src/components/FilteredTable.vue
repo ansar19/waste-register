@@ -1,26 +1,16 @@
 <template>
     <div class="meta-table">
-      <vue-good-table
-        :columns="columns"
-        :rows="records"
+      <vue-good-table :columns="columns" :rows="records"
         :search-options="{ enabled: true, placeholder: 'Введите текст для поиска' }"
-        :pagination-options="paginationOptions"
-      >
+        :pagination-options="paginationOptions">
         <div slot="emptystate">No data yet</div>
         <template slot="table-row" slot-scope="props">
           <span>{{props.formattedRow[props.column.field]}}</span>
         </template>
         <div slot="table-actions">
-          <download-excel
-            :data="records"
-            :fields="json_fields"
-            class="btn-sm btn-info mt-2 mb-2 ml-2 mr-4"
-            worksheet="Wastes"
-            name="wastes.xls"
-            v-tooltip="'Download_Data'"
-          >
+          <download-excel :data="records" :fields="json_fields" class="btn-sm btn-info mt-2 mb-2 ml-2 mr-4"
+            worksheet="Wastes" name="wastes.xls" v-tooltip="'Download_Data'">
             <span class="material-icons">cloud_download</span>
-            <!-- {{'Download_Data' | localize}} -->
           </download-excel>
         </div>
         <template slot="table-row" slot-scope="props">
@@ -36,7 +26,9 @@
 
 <script>
 import 'vue-good-table/dist/vue-good-table.css'
-import { VueGoodTable } from 'vue-good-table'
+import {
+  VueGoodTable
+} from 'vue-good-table'
 
 import flatPickr from "flatpickr";
 
@@ -46,13 +38,22 @@ import "flatpickr/dist/themes/material_blue.css";
 export default {
   data() {
     return {
-      columns: [
-        {
+      columns: [{
           label: 'Объем, т',
           field: 'amount',
           type: 'number',
           sortable: true
         },
+        // {
+          // label: "Лимит по данной категории",
+          // field: "limit",
+          // filterable: true,
+          // formatFn: this.percentageFormatFn,
+          // filterOptions: {
+          //   enabled: true,
+          //   placeholder: ""
+          // }
+        // },
         {
           label: "Дата вывоза",
           field: "removalDate",
@@ -109,16 +110,6 @@ export default {
             placeholder: 'Выберите тип'
           }
         },
-        // {
-        //   label: "Percent",
-        //   field: "amount",
-        //   filterable: true,
-        //   formatFn: this.percentageFormatFn,
-        //   filterOptions: {
-        //     enabled: true,
-        //     placeholder: ""
-        //   }
-        // },
         {
           label: 'Действия',
           field: 'action',
@@ -166,21 +157,19 @@ export default {
         },
         'Название места утилизации': {
           field: 'utilizatorName.title'
-          // callback: value => {
-          //   return `Landline Phone - ${value}`
-          // }
         },
         'Контактный телефон места утилизации': {
           field: 'utilizatorName.utilizatorPhone'
+          // callback: value => {
+          //   return `Landline Phone - ${value}`
+          // }
         }
       },
       json_meta: [
-        [
-          {
-            key: 'charset',
-            value: 'utf-8'
-          }
-        ]
+        [{
+          key: 'charset',
+          value: 'utf-8'
+        }]
       ]
     }
   },
@@ -197,28 +186,28 @@ export default {
       'input[placeholder="Filter Start Date"]',
       'input[placeholder="Filter Need By Date"]'
     ];
-    inputs.forEach(function(input) {
+    inputs.forEach(function (input) {
       flatPickr(input, {
         mode: "range",
         dateFormat: 'n/j/Y',
         mode: "range",
         showMonths: 2,
         allowInput: true,
-        onOpen: function(selectedDates, dateStr, instance) {
-              instance.setDate(instance.input.value, false);
-          }
+        onOpen: function (selectedDates, dateStr, instance) {
+          instance.setDate(instance.input.value, false);
+        }
       });
     });
   },
   methods: {
-    percentageFormatFn: function(value) {
-      value = Math.trunc(value * 100)
-      if (value == 0) {
-        return '< 1%'
-      }
-      return value + '%'
-    },
-    translateWasteColor(value) { 
+    // percentageFormatFn: function (value) {
+    //   value = Math.trunc(value * 100 )
+    //   if (value == 0) {
+    //     return '< 1%'
+    //   }
+    //   return value + '%'
+    // },
+    translateWasteColor(value) {
       const map = {
         amber: 'Янтарный',
         green: 'Зеленый',
@@ -227,7 +216,7 @@ export default {
       };
       return `${map[value]}`;
     },
-     // related to range select - flatpkr
+    // related to range select - flatpkr
     dateRangeFilter(data, filterString) {
       let dateRange = filterString.split("to");
       let startDate = Date.parse(dateRange[0]);

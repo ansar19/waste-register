@@ -46,7 +46,7 @@
                   </tr>
                   <tr>
                     <th>{{'Company_Name'|localize}}:</th>
-                    <td>{{record.companyInfo.companyName}}</td>
+                    <td>{{record.companyInfo.companyType.nameRu}} {{record.companyInfo.companyName}}</td>
                   </tr>
                   <tr>
                     <th>{{'Title_Transporter' | localize}}:</th>
@@ -172,6 +172,7 @@ export default {
           ..._this.record,
           categoryName: _this.record.categoryName,
           companyInfo: _this.record.companyInfo,
+          companyType: _this.record.companyInfo.companyType.nameRu,
           companyHead: _this.record.companyInfo.companyHead,
           replaceHazardList: _this.replaceHazardList,
           wasteCode: _this.record.wasteCode,

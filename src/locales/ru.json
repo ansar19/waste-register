@@ -190,6 +190,7 @@
   "Liquid": "Жидкие",
   "Pasty": "Пастообразные",
   "Message_Waste_Aggregate_State": "Отметьте Агрегатное состояние отхода",
-  "Select_Utilization_Way": "Выберите способ утилизации"
+  "Select_Utilization_Way": "Выберите способ утилизации",
+  "Company_Type": "Тип юридического лица"
 
 }

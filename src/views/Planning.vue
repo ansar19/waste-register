@@ -4,18 +4,17 @@
       <h5>{{'Menu_Planning'|localize}}</h5>
       <h5>{{info.bill.toFixed(2)}} {{'TON' | localize}}</h5>
       <div slot="table-actions">
-          <download-excel
-            :data="categories"
-            :fields="json_fields"
-            class="btn-sm btn-info mt-2 mb-2 ml-2 mr-4"
-            worksheet="Wastes"
-            name="actual_wastes.xls"
-            v-tooltip="'Download_Data'"
-          >
-            <span class="material-icons">cloud_download</span>
-            <!-- {{'Download_Data' | localize}} -->
-          </download-excel>
-        </div>
+        <download-excel
+          :data="categories"
+          :fields="json_fields"
+          class="btn-sm btn-info mt-2 mb-2 ml-2 mr-4"
+          worksheet="Wastes"
+          name="actual_wastes.xls"
+          v-tooltip="'Download_Data'"
+        >
+          <span class="material-icons">cloud_download</span>
+        </download-excel>
+      </div>
     </div>
 
     <Loader v-if="loading" />
@@ -26,7 +25,6 @@
     </p>
 
     <section v-else>
-
       <div v-for="cat of categories" :key="cat.id">
         <p>
           <strong>{{cat.title}}:</strong>
@@ -56,38 +54,38 @@ export default {
   name: 'planning',
   metaInfo() {
     return {
-      title: this.$title('Menu_Planning')
+      title: this.$title('Menu_Planning'),
     }
   },
   data: () => ({
     loading: true,
     categories: [],
     // related to excel export
-      json_fields: {
-        'Название': 'title',
-        'Факт. объем, т': 'spend',
-        'Лимит, т': 'limit'
-      },
-      json_meta: [
-        [
-          {
-            key: 'charset',
-            value: 'utf-8'
-          }
-        ]
-      ]
+    json_fields: {
+      Название: 'title',
+      'Факт. объем, т': 'spend',
+      'Лимит, т': 'limit',
+    },
+    json_meta: [
+      [
+        {
+          key: 'charset',
+          value: 'utf-8',
+        },
+      ],
+    ],
   }),
   computed: {
-    ...mapGetters(['info'])
+    ...mapGetters(['info']),
   },
   async mounted() {
     const records = await this.$store.dispatch('fetchRecords')
     const categoires = await this.$store.dispatch('fetchCategories')
 
-    this.categories = categoires.map(cat => {
+    this.categories = categoires.map((cat) => {
       const spend = records
-        .filter(r => r.categoryId === cat.id)
-        .filter(r => r.type === 'outcome')
+        .filter((r) => r.categoryId === cat.id)
+        .filter((r) => r.type === 'outcome')
         .reduce((total, record) => {
           return (total += +record.amount)
         }, 0)
@@ -100,18 +98,18 @@ export default {
       const tooltipValue = cat.limit - spend
       const tooltip = `${
         tooltipValue < 0 ? localizeFilter('MoreThan') : localizeFilter('Stayed')
-      } ${(Math.abs(tooltipValue))}`
+      } ${Math.abs(tooltipValue)}`
 
       return {
         ...cat,
         progressPercent,
         progressColor,
         spend,
-        tooltip
+        tooltip,
       }
     })
 
     this.loading = false
-  }
+  },
 }
 </script>

@@ -7,15 +7,15 @@
 
       <form @submit.prevent="submitHandler">
         <div class="from-group">
-          <label for="name">{{'Title_Transporter'|localize}}</label>
-          <input id="name" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}" class="form-control">
+          <label for="title-transporter">{{'Title_Transporter'|localize}}</label>
+          <input id="title-transporter" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}" class="form-control">
           <span v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid">{{'Message_TransporterTitle'|localize}}</span>
         </div>
 
         <div class="from-group">
-          <label for="phone">{{'Phone_Transporter'|localize}}</label>
-          <input id="phone" type="text" v-model="transporterPhone" :class="{invalid: $v.transporterPhone.$dirty && !$v.transporterPhone.required}" class="form-control">
+          <label for="transporter-phone">{{'Phone_Transporter'|localize}}</label>
+          <input id="transporter-phone" type="text" v-model="transporterPhone" :class="{invalid: $v.transporterPhone.$dirty && !$v.transporterPhone.required}" class="form-control">
           <span v-if="$v.transporterPhone.$dirty && !$v.transporterPhone.required"
             class="helper-text invalid">{{'Message_Phone_Transporter'|localize}}</span>
         </div>

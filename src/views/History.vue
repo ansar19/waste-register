@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h5>{{'History_Title'|localize}}</h5>
-      <p class="subcomponent-title">{{ companyName }}</p>
+      <p class="subcomponent-title">{{companyType.nameRu}} {{ companyName }}</p>
     </div>
 
 
@@ -71,6 +71,9 @@ export default {
             wasteColor: categoires.find(
               c => c.id === record.categoryId
             ).wasteColor,
+            limit: categoires.find(
+              c => c.id === record.categoryId
+            ).limit,
             typeClass: record.type === 'income' ? 'green' : 'orange',
             transpoterName: transporters.find(
               t => t.id === record.transporterId
@@ -90,6 +93,9 @@ export default {
   computed: {
     companyName() {
       return this.$store.getters.info.companyName
+    },
+    companyType() {
+      return this.$store.getters.info.companyType
     },
     // IE 11 or later
     format(date) {

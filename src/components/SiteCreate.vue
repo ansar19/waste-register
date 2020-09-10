@@ -7,15 +7,15 @@
 
       <form @submit.prevent="submitHandler">
         <div class="from-group">
-          <label for="name">{{'Title_Site'|localize}}</label>
-          <input id="name" type="text" v-model="siteName" :class="{invalid: $v.siteName.$dirty && !$v.siteName.required}" class="form-control">
+          <label for="name1">{{'Title_Site'|localize}}</label>
+          <input id="name1" type="text" v-model="siteName" :class="{invalid: $v.siteName.$dirty && !$v.siteName.required}" class="form-control">
           <span v-if="$v.siteName.$dirty && !$v.siteName.required"
             class="helper-text invalid">{{'Message_SiteTitle'|localize}}</span>
         </div>
 
         <div class="form-group">
-          <label for="site-comments">{{'Site_Comments'|localize}}</label>
-          <textarea id="site-comments" type="textarea" v-model="siteComments"
+          <label for="site-comments1">{{'Site_Comments'|localize}}</label>
+          <textarea id="site-comments1" type="textarea" v-model="siteComments"
             class="form-control">
           </textarea>
         </div>

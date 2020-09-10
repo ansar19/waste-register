@@ -7,8 +7,8 @@
 
       <form @submit.prevent="submitHandler">
         <div class="from-group">
-          <label for="name">{{'Title'|localize}}</label>
-          <input id="name" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}"
+          <label for="name1">{{'Title'|localize}}</label>
+          <input id="name1" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}"
             class="form-control" />
           <span v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid">{{'Message_CategoryTitle'|localize}}</span>
@@ -16,26 +16,26 @@
 
         <!-- Код отхода -->
         <div class="from-group">
-          <label for="waste-code">{{'Waste_Code'|localize}}</label>
-          <input id="waste-code" type="text" v-model="wasteCode" class="form-control" />
+          <label for="waste-code1">{{'Waste_Code'|localize}}</label>
+          <input id="waste-code1" type="text" v-model="wasteCode" class="form-control" />
         </div>
 
         <!-- Агрегатное состояние отходов -->
         <div class="from-group">
           <label>{{'Waste_Aggregate_State' | localize}}</label>
           <p>
-            <label for="solid">
-              <input name="group2" type="radio" id="solid" value="solid" v-model="wasteAggregateState" />
+            <label for="solid1">
+              <input name="group2" type="radio" id="solid1" value="solid" v-model="wasteAggregateState" />
               <span>{{'Solid' | localize}}</span>
             </label>
             <br />
-            <label for="liquid">
-              <input name="group2" type="radio" id="liquid" value="liquid" v-model="wasteAggregateState" />
+            <label for="liquid1">
+              <input name="group2" type="radio" id="liquid1" value="liquid" v-model="wasteAggregateState" />
               <span>{{'Liquid' | localize}}</span>
             </label>
             <br />
-            <label for="pasty">
-              <input name="group2" type="radio" id="pasty" value="pasty" v-model="wasteAggregateState" />
+            <label for="pasty1">
+              <input name="group2" type="radio" id="pasty1" value="pasty" v-model="wasteAggregateState" />
               <span>{{'Pasty' | localize}}</span>
             </label>
             <br />
@@ -180,8 +180,8 @@
 
         <!-- Рекомендуемый способ переработки отходов -->
         <div class="form-group">
-          <label for="name">{{'Recycling_Type'|localize}}</label>
-          <textarea id="recycling-type" type="text" v-model="recyclingType"
+          <label for="recycling-type1">{{'Recycling_Type'|localize}}</label>
+          <textarea id="recycling-type1" type="text" v-model="recyclingType"
             :class="{invalid: $v.recyclingType.$dirty && !$v.recyclingType.required}" class="form-control"></textarea>
           <span v-if="$v.recyclingType.$dirty && !$v.recyclingType.required"
             class="helper-text invalid">{{'Message_Recycling_Type_Title'|localize}}</span>
@@ -189,8 +189,8 @@
 
         <!-- необходимые меры предосторожности при обращении с отходами -->
         <div class="form-group">
-          <label for="precaution-type">{{'Precaution_Title'|localize}}</label>
-          <textarea id="precaution-type" type="textarea" v-model="precaution"
+          <label for="precaution-type1">{{'Precaution_Title'|localize}}</label>
+          <textarea id="precaution-type1" type="textarea" v-model="precaution"
             :class="{invalid: $v.precaution.$dirty && !$v.precaution.required}" class="form-control"></textarea>
           <span v-if="$v.precaution.$dirty && !$v.precaution.required"
             class="helper-text invalid">{{'Message_Precaution_Title'|localize}}</span>
@@ -200,8 +200,8 @@
         <!-- Требование к транспортировке отходов и проведение погрузо-разгрузочных
         работ-->
         <div class="form-group">
-          <label for="transportation-requirements">{{'Transportation_Requirements_Title'|localize}}</label>
-          <textarea id="transportation-requirements" type="textarea" v-model="transportationRequirements"
+          <label for="transportation-requirements1">{{'Transportation_Requirements_Title'|localize}}</label>
+          <textarea id="transportation-requirements1" type="textarea" v-model="transportationRequirements"
             class="form-control"></textarea>
         </div>
         <!-- END Требование к транспортировке отходов и проведение погрузо-разгрузочных
@@ -210,14 +210,14 @@
         <!-- Меры по предупреждению и ликвидации чрезвычайных ситуаций природного и техногенного
         характера и их последствий-->
         <div class="form-group">
-          <label for="emergency-requirements">{{'Emergency_Requirements_Title'|localize}}</label>
-          <textarea id="emergency-requirements" type="textarea" v-model="emergency" class="form-control"></textarea>
+          <label for="emergency-requirements1">{{'Emergency_Requirements_Title'|localize}}</label>
+          <textarea id="emergency-requirements1" type="textarea" v-model="emergency" class="form-control"></textarea>
         </div>
 
         <!-- Дополнительная информация -->
         <div class="form-group">
-          <label for="additional-info">{{'Additional_Information'|localize}}</label>
-          <textarea id="additional-info" type="textarea" v-model="additionalInfo" class="form-control"></textarea>
+          <label for="additional-info1">{{'Additional_Information'|localize}}</label>
+          <textarea id="additional-info1" type="textarea" v-model="additionalInfo" class="form-control"></textarea>
         </div>
 
         <!-- waste color -->
@@ -250,9 +250,9 @@
         <!-- для отчета по инвентаризации отходов -->
 
         <div class="form-group">
-          <label for="waste-types">{{ 'Waste_Type' | localize}}</label>
+          <label for="waste-types1">{{ 'Waste_Type' | localize}}</label>
           <select v-model="wasteColor.wasteType" v-if="wasteColor.color" class="browser-default">
-            <option id="waste-types" v-for="(option, id) in setOptions" v-bind:value="option.val" v-bind:key="id">
+            <option id="waste-types1" v-for="(option, id) in setOptions" v-bind:value="option.val" v-bind:key="id">
               {{option.text}}</option>
           </select>
           <br />
@@ -261,8 +261,8 @@
         <!-- индекс отхода  -->
 
         <div class="form-group">
-          <label for="waste-index">{{'Waste_Index'|localize}}</label>
-          <input id="waste-index" type="text" v-model="wasteIndex" class="form-control" />
+          <label for="waste-index1">{{'Waste_Index'|localize}}</label>
+          <input id="waste-index1" type="text" v-model="wasteIndex" class="form-control" />
         </div>
 
         <!-- END -->
@@ -270,8 +270,8 @@
         <!-- Limit waste -->
 
         <div class="form-group">
-          <label for="limit">{{'Limit'|localize}}</label>
-          <input id="limit" type="number" v-model.number="limit"
+          <label for="limit1">{{'Limit'|localize}}</label>
+          <input id="limit1" type="number" v-model.number="limit"
             :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}" class="form-control" />
           <span v-if="$v.limit.$dirty && !$v.limit.minValue"
             class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
@@ -280,8 +280,8 @@
         <!-- Limit KZT -->
 
         <div class="form-group">
-          <label for="limitKZT">{{'Limit_KZT'|localize}}</label>
-          <input id="limitKZT" type="number" v-model.number="limitKZT"
+          <label for="limitKZT1">{{'Limit_KZT'|localize}}</label>
+          <input id="limitKZT1" type="number" v-model.number="limitKZT"
             :class="{invalid: $v.limitKZT.$dirty && !$v.limitKZT.minValue}" class="form-control" />
           <span v-if="$v.limitKZT.$dirty && !$v.limitKZT.minValue"
             class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>

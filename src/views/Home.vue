@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h5>{{'Main_Panel'|localize}}</h5>
-      <p class="subcomponent-title">{{ companyName }}</p>
+      <p class="subcomponent-title">{{ companyType }} {{ companyName }}</p>
       <!-- <button class="btn waves-effect waves-light btn-small" @click="refresh">
         <i class="material-icons">refresh</i>
       </button>-->
@@ -75,7 +75,10 @@ export default {
   computed: {
     companyName() {
       return this.$store.getters.info.companyName
-    }
+    },
+    companyType() {
+      return this.$store.getters.info.companyType.nameRu
+    },
   },
   components: {
     Planning,

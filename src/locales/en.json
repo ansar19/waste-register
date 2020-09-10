@@ -192,5 +192,6 @@
   "Liquid": "Liquid",
   "Pasty": "Pasty",
   "Message_Waste_Aggregate_State": "Check the Aggregate state of waste",
-  "Select_Utilization_Way": "Select Utilization Way"
+  "Select_Utilization_Way": "Select Utilization Way",
+  "Company_Type": "Legal entity type"
 }

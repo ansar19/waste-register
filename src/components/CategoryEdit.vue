@@ -177,7 +177,7 @@
         <!-- Рекомендуемый способ переработки отходов -->
 
         <div class="form-group">
-          <label for="name">{{'Recycling_Type'|localize}}</label>
+          <label for="recycling-type">{{'Recycling_Type'|localize}}</label>
           <textarea id="recycling-type" type="text" v-model="recyclingType"
             :class="{invalid: $v.recyclingType.$dirty && !$v.recyclingType.required}" class="form-control"></textarea>
 

@@ -33,6 +33,20 @@
         >{{'Message_Enter_Company_Name'|localize}}</small>
       </div>
 
+      <!-- Тип юр лица -->
+
+      <div class="from-group">
+        <label for="company-type">{{ 'Company_Type' | localize }}</label>
+        <v-select id="company-type" v-model="companyType" label="nameLongRu" :options="companyTypeOptions"></v-select>
+
+         <small
+          class="helper-text invalid"
+          v-if="$v.companyType.$dirty && !$v.companyType.required"
+        >{{'Message_Enter_Company_Type'|localize}}</small>
+      </div>
+
+      <!-- END Тип юр лица  -->
+
       <div class="form-group">
         <label for="company-bin">{{'Company_BIN'|localize}}</label>
         <input
@@ -151,6 +165,7 @@
 import { mapGetters, mapActions } from 'vuex'
 import { required, minLength, maxLength, email } from 'vuelidate/lib/validators'
 import localeFilter from '@/filters/localize.filter'
+import 'vue-select/dist/vue-select.css';
 
 export default {
   metaInfo() {
@@ -161,6 +176,15 @@ export default {
   data: () => ({
     name: '',
     companyName: '',
+    companyType: {
+      value: undefined,
+      nameRu: undefined,
+      nameKz: undefined,
+      nameEn: undefined,
+      nameLongRu: undefined,
+      nameLongKz: undefined,
+      nameLongEn: undefined
+    },
     companyBin: '',
     companyHead: '',
     companyPhone: '',
@@ -169,11 +193,32 @@ export default {
     companyBankAccount: '',
     companyBank: '',
     companyAddress: '',
-    isRuLocale: true
+    isRuLocale: true,
+    companyTypeOptions: [
+      {
+        value: 'llp',
+        nameRu: 'ТОО',
+        nameKz: 'ЖШС',
+        nameEn: 'LLP',
+        nameLongRu: 'Товарищество с ограниченной ответственностью',
+        nameLongKz: 'Жауапкершілігі шектеулі серіктестік',
+        nameLongEn: 'Limited liability partnership'
+      },
+      {
+        value: 'jsc',
+        nameRu: 'АО',
+        nameKz: 'ЖШС',
+        nameEn: 'JSC',
+        nameLongRu: 'Акционерное общество',
+        nameLongKz: 'Жауапкершілігі шектеулі серіктестік',
+        nameLongEn: 'Joint Stock Company'
+      }
+    ]
   }),
   validations: {
     name: { required },
     companyName: { required },
+    companyType: { required },
     companyBin: { required, minLength: minLength(12), maxLength: maxLength(12) },
     companyHead: { minLength: minLength(2) },
     companyEmail: { email }
@@ -181,6 +226,7 @@ export default {
   mounted() {
     this.name = this.info.name
     this.companyName = this.info.companyName
+    this.companyType = this.info.companyType
     this.companyBin = this.info.companyBin
     this.companyHead = this.info.companyHead
     this.companyPhone = this.info.companyPhone
@@ -209,6 +255,7 @@ export default {
         await this.updateInfo({
           name: this.name,
           companyName: this.companyName,
+          companyType: this.companyType,
           companyBin: this.companyBin,
           companyHead: this.companyHead,
           companyPhone: this.companyPhone,

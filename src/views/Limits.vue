@@ -2,7 +2,7 @@
   <div>
     <div class="page-title">
       <h5>{{'Limit_Panel'|localize}}</h5>
-      <p class="subcomponent-title">{{ companyName }}</p>
+      <p class="subcomponent-title">{{ companyType }} {{ companyName }}</p>
     </div>
     <div class="row">
       <div class="col-lg-6">
@@ -33,6 +33,9 @@ export default {
   computed: {
     companyName() {
       return this.$store.getters.info.companyName
+    },
+    companyType() {
+      return this.$store.getters.info.companyType.nameRu
     },
   },
   components: {
