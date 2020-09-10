@@ -38,6 +38,12 @@
 import 'vue-good-table/dist/vue-good-table.css'
 import { VueGoodTable } from 'vue-good-table'
 
+import flatPickr from "flatpickr";
+import { Russian } from "flatpickr/dist/l10n/ru.js"
+
+import "flatpickr/dist/flatpickr.css";
+import "flatpickr/dist/themes/material_blue.css";
+
 export default {
   data() {
     return {
@@ -49,18 +55,18 @@ export default {
           sortable: true
         },
         {
-          label: 'Дата вывоза',
-          field: 'removalDate',
-          type: 'date',
-          dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
-          dateOutputFormat: 'dd-MM-yyyy',
-          sortable: true,
+          label: "Дата вывоза",
+          field: "removalDate",
           filterable: true,
-          // filterOptions: {
-          //   enabled: true,
-          //   placeholder: 'Дата вывоза',
-          //   filterFn: this.dateRangeFilter
-          // }
+          sortable: true,
+          type: "date",
+          dateInputFormat: "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+          dateOutputFormat: "dd-MM-yyyy",
+          filterOptions: {
+            enabled: true,
+            placeholder: "начать фильтрацию",
+            filterFn: this.dateRangeFilter
+          }
         },
         {
           label: 'Название',
@@ -202,11 +208,33 @@ export default {
       };
       return `${map[value]}`;
     },
+    dateRangeFilter(data, filterString) {
+      let dateRange = filterString.split("to");
+      let startDate = Date.parse(dateRange[0]);
+      let endDate = Date.parse(dateRange[1]);
+      return (data =
+        Date.parse(data) >= startDate && Date.parse(data) <= endDate);
+    },
   },
   computed: {
   },
+  mounted() {
+    let inputs = [
+      'input[placeholder="начать фильтрацию"]',
+      'input[placeholder="Filter Start Date"]',
+      'input[placeholder="Filter Need By Date"]'
+    ];
+    inputs.forEach(function(input) {
+      flatPickr(input, {
+        dateFormat: "m-d-Y",
+        mode: "range",
+        allowInput: true
+      });
+    });
+  },
   components: {
-    VueGoodTable
+    VueGoodTable,
+    flatPickr
   }
 }
 </script>
