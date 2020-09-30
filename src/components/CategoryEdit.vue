@@ -248,7 +248,7 @@
         <div class="form-group">
           <label for="waste-types">{{ 'Waste_Type' | localize}}</label>
           <select v-model="wasteColor.wasteType" v-if="wasteColor.color" class="browser-default">
-            <option id="waste-types" v-for="(option, id) in setOptions" v-bind:value="option.val" v-bind:key="id">
+            <option id="waste-types" v-for="(option, id) in setOptions" v-bind:value="option" v-bind:key="id">
               {{option.text}}</option>
           </select>
 

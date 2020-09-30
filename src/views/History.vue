@@ -71,6 +71,9 @@ export default {
             wasteColor: categoires.find(
               c => c.id === record.categoryId
             ).wasteColor,
+            wasteType: categoires.find(
+              c => c.id === record.categoryId
+            ).wasteType,
             limit: categoires.find(
               c => c.id === record.categoryId
             ).limit,
@@ -88,7 +91,8 @@ export default {
           }
         })
       )
-    }
+    },
+    
   },
   computed: {
     companyName() {

@@ -156,6 +156,8 @@
   "Instruction_Line5": "The system is ready for use, and you can start filling out the waste register using the link ''New entry'' - select the name of the waste, transporter, place of disposal and fill in the remaining fields.",
   "Instruction_Line6": "After saving the record, you can see the results by clicking on the links ''History'' and ''Limits''.",
   "Download_Data": "Upload data",
+  "Download_Data_XLSX": "Upload data XLSX",
+  "Download_Data_DOCX": "Upload data DOCX",
   "Search_Text": "Enter text to search",
   "Delete_Button": "Delete",
   "Add_Row_Button": "Add",

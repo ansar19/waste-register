@@ -1,27 +1,38 @@
 <template>
-    <div class="meta-table">
-      <vue-good-table :columns="columns" :rows="records"
-        :search-options="{ enabled: true, placeholder: 'Введите текст для поиска' }"
-        :pagination-options="paginationOptions">
-        <div slot="emptystate">No data yet</div>
-        <template slot="table-row" slot-scope="props">
-          <span>{{props.formattedRow[props.column.field]}}</span>
-        </template>
-        <div slot="table-actions">
-          <download-excel :data="records" :fields="json_fields" class="btn-sm btn-info mt-2 mb-2 ml-2 mr-4"
-            worksheet="Wastes" name="wastes.xls" v-tooltip="'Download_Data'">
-            <span class="material-icons">cloud_download</span>
-          </download-excel>
-        </div>
-        <template slot="table-row" slot-scope="props">
-          <span v-if="props.column.field == 'action'">
-            <button class="btn-sm btn-info" @click="$router.push('/detail/' + props.row.id)">
-              <i class="material-icons">open_in_new</i>
-            </button>
-          </span>
-        </template>
-      </vue-good-table>
+  <div class="meta-table">
+    
+
+    <vue-good-table :columns="columns" :rows="records"
+      :search-options="{ enabled: true, placeholder: 'Введите текст для поиска' }"
+      :pagination-options="paginationOptions">
+      <div slot="emptystate">No data yet</div>
+      <template slot="table-row" slot-scope="props">
+        <span>{{props.formattedRow[props.column.field]}}</span>
+      </template>
+      <div slot="table-actions">
+        <!-- download excel -->
+        <download-excel :data="records" :fields="json_fields" class="btn-sm float-left btn-info mt-2 mb-2 ml-2 mr-4"
+          worksheet="Wastes" name="wastes.xls" v-tooltip="'Download_Data_XLSX'">
+          <span class="material-icons">cloud_download</span>
+        </download-excel>
+
+        <!-- download doc -->
+    <div v-tooltip="'Download_Data_DOCX'" class="float-right">
+      <button class="btn-sm btn-primary mt-2 mb-2 ml-2 mr-4" @click.prevent="exportWord">
+        <span class="material-icons">cloud_download</span>
+      </button>
     </div>
+    <!-- END download doc -->
+      </div>
+      <template slot="table-row" slot-scope="props">
+        <span v-if="props.column.field == 'action'">
+          <button class="btn-sm btn-info" @click="$router.push('/detail/' + props.row.id)">
+            <i class="material-icons">open_in_new</i>
+          </button>
+        </span>
+      </template>
+    </vue-good-table>
+  </div>
 </template>
 
 <script>
@@ -34,6 +45,9 @@ import flatPickr from "flatpickr";
 
 import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/material_blue.css";
+
+import JSZip from 'jszip'
+import { saveAs } from 'file-saver'
 
 export default {
   data() {
@@ -84,6 +98,11 @@ export default {
           },
           tdClass: 'text-center',
           formatFn: this.translateWasteColor
+        },
+        {
+          label: 'Вид отхода',
+          field: 'wasteColor.wasteType.text',
+          sortable: true
         },
         {
           label: 'Место вывоза',
@@ -155,6 +174,9 @@ export default {
             return `${map[value]}`;
           }
         },
+        'Вид отхода': {
+          field: 'wasteColor.wasteType.text',
+        },
         'Название места утилизации': {
           field: 'utilizatorName.title'
         },
@@ -199,6 +221,20 @@ export default {
       });
     });
   },
+  computed: {
+    companyName() {
+      return this.$store.getters.info.companyName
+    },
+    companyType() {
+      return this.$store.getters.info.companyType
+    },
+    companyBin() {
+      return this.$store.getters.info.companyBin
+    },
+    companyHead() {
+      return this.$store.getters.info.companyHead
+    },
+  },
   methods: {
     // percentageFormatFn: function (value) {
     //   value = Math.trunc(value * 100 )
@@ -224,6 +260,64 @@ export default {
       return (data =
         Date.parse(data) >= startDate && Date.parse(data) <= endDate);
     },
+    // Click export word
+    exportWord() {
+      let _this = this
+      // Read and get the binary content of the template file
+      // Note: The
+      // template file is recommended to be placed under the static directory file.
+      // When using vue-cli2, put it in the static directory. When using vue-cli3, put it in the public directory.
+      // Because when I use it, I put it in the same directory of the .vue file, and I can't read the template.
+
+      JSZipUtils.getBinaryContent('../templates/waste_inventory.docx', function(
+        error,
+        content
+      ) {
+        // input.docx Is a template. When we export, we will export the corresponding data according to this template
+        // Throw an exception
+        if (error) {
+          throw error
+        }
+
+        // Create a JSZip instance with the content of the template
+        let zip = new JSZip(content)
+        // Create and load docxtemplater instance object
+        let doc = new window.docxtemplater().loadZip(zip)
+        // Set the value of the template variable
+        doc.setData({
+          ..._this.records,
+          wasteRecords: _this.records,
+          companyName: _this.companyName,
+          companyType: _this.companyType.nameRu,
+          companyBin: _this.companyBin,
+          companyHead: _this.companyHead
+        })
+
+        try {
+          // Replace all template variables with the values of template variables
+          doc.render()
+        } catch (error) {
+          // Throw an exception
+          let e = {
+            message: error.message,
+            name: error.name,
+            stack: error.stack,
+            properties: error.properties
+          }
+          console.log(JSON.stringify({ error: e }))
+          throw error
+        }
+
+        // Generate a zip file representing the docxtemplater object (not a real file, but a representation in memory)
+        let out = doc.getZip().generate({
+          type: 'blob',
+          mimeType:
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        })
+        // Save the target file object as a file of the target type and name it
+        saveAs(out, 'waste_inventory.docx')
+      })
+    }
   },
   components: {
     VueGoodTable,
