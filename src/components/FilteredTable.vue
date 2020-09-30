@@ -1,7 +1,5 @@
 <template>
   <div class="meta-table">
-    
-
     <vue-good-table :columns="columns" :rows="records"
       :search-options="{ enabled: true, placeholder: 'Введите текст для поиска' }"
       :pagination-options="paginationOptions">
@@ -17,12 +15,12 @@
         </download-excel>
 
         <!-- download doc -->
-    <div v-tooltip="'Download_Data_DOCX'" class="float-right">
-      <button class="btn-sm btn-primary mt-2 mb-2 ml-2 mr-4" @click.prevent="exportWord">
-        <span class="material-icons">cloud_download</span>
-      </button>
-    </div>
-    <!-- END download doc -->
+        <div v-tooltip="'Download_Data_DOCX'" class="float-right">
+          <button class="btn-sm btn-primary mt-2 mb-2 ml-2 mr-4" @click.prevent="exportWord">
+            <span class="material-icons">cloud_download</span>
+          </button>
+        </div>
+        <!-- END download doc -->
       </div>
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'action'">
@@ -269,6 +267,8 @@ export default {
       // When using vue-cli2, put it in the static directory. When using vue-cli3, put it in the public directory.
       // Because when I use it, I put it in the same directory of the .vue file, and I can't read the template.
 
+    
+
       JSZipUtils.getBinaryContent('../templates/waste_inventory.docx', function(
         error,
         content
@@ -283,6 +283,10 @@ export default {
         let zip = new JSZip(content)
         // Create and load docxtemplater instance object
         let doc = new window.docxtemplater().loadZip(zip)
+        // handle undefined values in docXTemplater
+        doc.setOptions({nullGetter: function() {
+          return ""; 
+        }});
         // Set the value of the template variable
         doc.setData({
           ..._this.records,
