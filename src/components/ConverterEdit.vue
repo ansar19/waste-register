@@ -20,6 +20,7 @@
                 <tr class="bg-primary text-white">
                   <th>{{'Waste_Name_And_UOM' | localize}}</th>
                   <th>{{'Conversion_Factor_To_Tons' | localize}}</th>
+                  <th>{{'Comment' | localize}}</th>
                   <!-- <th></th> -->
                 </tr>
               </thead>
@@ -30,6 +31,9 @@
                   </td>
                   <td>
                     <input class="form-control" type="text" v-model.number="unitOfMeasurement.coef" />
+                  </td>
+                  <td>
+                    <input class="form-control" type="text" v-model="unitOfMeasurement.comment" />
                   </td>
                   <!-- <td scope="row" class="trashIconContainer">
                     <button
@@ -68,7 +72,7 @@ export default {
   data: () => ({
     converterSelect: null,
     // converters: [],
-    unitOfMeasurements: [{ name: '', coef: '' }],
+    unitOfMeasurements: [{ name: '', coef: '', comment: '' }],
     name: '',
     coef: '',
     current: null,
@@ -109,6 +113,7 @@ export default {
       this.unitOfMeasurements.push({
         name: '',
         coef: '',
+        comment: ''
       })
     },
     async deleteRow(id) {
