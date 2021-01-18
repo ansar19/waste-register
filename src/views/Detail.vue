@@ -41,6 +41,14 @@
                     <td>{{record.amount}}</td>
                   </tr>
                   <tr>
+                    <th>{{'Is_ROP'|localize}}:</th>
+                    <td>{{record.isRop}}</td>
+                  </tr>
+                  <tr>
+                    <th>{{'ROP_Category'|localize}}:</th>
+                    <td>{{record.selectedRop.codeTNVED}} {{record.selectedRop.productType}}</td>
+                  </tr>
+                  <tr>
                     <th>{{'Description'|localize}}:</th>
                     <td>{{record.description}}</td>
                   </tr>

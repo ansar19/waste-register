@@ -118,6 +118,12 @@ export default {
           sortable: true
         },
         {
+          label: 'РОП?',
+          field: 'isRop',
+          formatFn: this.translateRop,
+          sortable: true
+        },
+        {
           label: 'Тип',
           field: 'typeText',
           sortable: true,
@@ -247,6 +253,13 @@ export default {
         green: 'Зеленый',
         red: 'Красный',
         na: 'Не применимо'
+      };
+      return `${map[value]}`;
+    },
+    translateRop(value) {
+      const map = {
+        true: 'Да',
+        false: 'Нет'
       };
       return `${map[value]}`;
     },

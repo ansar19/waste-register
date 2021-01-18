@@ -197,5 +197,7 @@
   "Pasty": "Pasty",
   "Message_Waste_Aggregate_State": "Check the Aggregate state of waste",
   "Select_Utilization_Way": "Select Utilization Way",
-  "Company_Type": "Legal entity type"
+  "Company_Type": "Legal entity type",
+  "Is_ROP": "Is ROP",
+  "ROP_Category": "ROP Category"
 }
