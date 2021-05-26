@@ -44,47 +44,49 @@
           <option v-for="c in categories" :key="c.id" :value="c.id">{{c.title}}</option>
         </select>
       </div>
-      
+
       <!-- РОП -->
-       <fieldset>
-         <div class="form-check custom-control custom-radio d-block my-2">
-           <input class="form-check-input custom-control-input" type="radio" v-bind:value="false" v-model="isRop"
-             name="flexRadioDefault" id="flexRadioDefault1">
-           <label class="form-check-label custom-control-label" for="flexRadioDefault1">
-             Отход не относится к группе РОП
-           </label>
-         </div>
-
-
-         <div class="form-check custom-control custom-radio d-block my-2">
-           <input class="form-check-input custom-control-input" type="radio" v-bind:value="true" v-model="isRop"
-             name="flexRadioDefault" id="flexRadioDefault2">
-           <label class="form-check-label custom-control-label" for="flexRadioDefault2">
-             РОП
-           </label>
-         </div>
-
-      <template v-if="isRop == true">
-        <div class="mb-3">
-          <div>
-            <label class="form-label">Выберите из перечня продукции (товаров), на которую (которые) распространяются расширенные обязательства производителей (импортеров)</label>
-            <v-select :options="ropOptions" label="productType" v-model="selectedRop" :selectable="option => !option.hasOwnProperty('group')" class="style-chooser"> 
-            <template #option="{ group, productType }">
-              <div v-if="group" class="group">
-                {{ group }}
-              </div>
-              {{ productType }}
-            </template>
-          </v-select>
-          <span>{{selectedRop.codeTNVED}} - {{selectedRop.productType}}</span> 
-          </div>
+      <fieldset>
+        <div class="form-check custom-control custom-radio d-block my-2">
+          <input class="form-check-input custom-control-input" type="radio" v-bind:value="false" v-model="isRop"
+            name="flexRadioDefault" id="flexRadioDefault1">
+          <label class="form-check-label custom-control-label" for="flexRadioDefault1">
+            Отход не относится к группе РОП
+          </label>
         </div>
-      </template>
-      <template v-else>
-        Отход не относится к группе РОП
-      </template>
+
+
+        <div class="form-check custom-control custom-radio d-block my-2">
+          <input class="form-check-input custom-control-input" type="radio" v-bind:value="true" v-model="isRop"
+            name="flexRadioDefault" id="flexRadioDefault2">
+          <label class="form-check-label custom-control-label" for="flexRadioDefault2">
+            РОП
+          </label>
+        </div>
+
+        <template v-if="isRop == true">
+          <div class="mb-3">
+            <div>
+              <label class="form-label">Выберите из перечня продукции (товаров), на которую (которые) распространяются
+                расширенные обязательства производителей (импортеров)</label>
+              <v-select :options="ropOptions" label="productType" v-model="selectedRop"
+                :selectable="option => !option.hasOwnProperty('group')" class="style-chooser">
+                <template #option="{ group, productType }">
+                  <div v-if="group" class="group">
+                    {{ group }}
+                  </div>
+                  {{ productType }}
+                </template>
+              </v-select>
+              <span>{{selectedRop.codeTNVED}} - {{selectedRop.productType}}</span>
+            </div>
+          </div>
+        </template>
+        <template v-else>
+          Отход не относится к группе РОП
+        </template>
       </fieldset>
-      
+
 
       <!-- Перевозчик -->
 
@@ -185,7 +187,6 @@ import {
 import localizeFilter from '@/filters/localize.filter'
 
 import 'vue-select/dist/vue-select.css';
-
 
 export default {
   name: 'record',
