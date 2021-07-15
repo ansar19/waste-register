@@ -199,5 +199,7 @@
   "Select_Utilization_Way": "Select Utilization Way",
   "Company_Type": "Legal entity type",
   "Is_ROP": "Is ROP",
-  "ROP_Category": "ROP Category"
+  "ROP_Category": "ROP Category",
+  "Attach_Documents": "Attach Documents",
+  "Utilization_Way": "Utilization Way"
 }

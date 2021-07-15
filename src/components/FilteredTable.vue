@@ -45,7 +45,9 @@ import "flatpickr/dist/flatpickr.css";
 import "flatpickr/dist/themes/material_blue.css";
 
 import JSZip from 'jszip'
-import { saveAs } from 'file-saver'
+import {
+  saveAs
+} from 'file-saver'
 
 export default {
   data() {
@@ -57,14 +59,14 @@ export default {
           sortable: true
         },
         // {
-          // label: "Лимит по данной категории",
-          // field: "limit",
-          // filterable: true,
-          // formatFn: this.percentageFormatFn,
-          // filterOptions: {
-          //   enabled: true,
-          //   placeholder: ""
-          // }
+        // label: "Лимит по данной категории",
+        // field: "limit",
+        // filterable: true,
+        // formatFn: this.percentageFormatFn,
+        // filterOptions: {
+        //   enabled: true,
+        //   placeholder: ""
+        // }
         // },
         {
           label: "Дата вывоза",
@@ -116,6 +118,17 @@ export default {
           label: 'Название места утилизации',
           field: 'utilizatorName.title',
           sortable: true
+        },
+        {
+          label: 'Способ утилизации',
+          field: 'utilizationWay',
+          formatFn: this.translateUtilizationWay,
+          sortable: true,
+          filterOptions: {
+            enabled: true,
+            filterDropdownItems: ['transferredTo3rdParties', 'recyclingReuse', 'incinerationWithEnergyRecovery', 'incinerationWithOutEnergyRecovery', 'fullNeutralizationAtCompany', 'partialNeutralizationAtCompany', 'storageAtOwnWasteFacilities', 'dumpingAtOwnWasteFacilities', 'disposalAtOwnSolidDomesticLlandfill'],
+            placeholder: 'Выберите'
+          }
         },
         {
           label: 'РОП?',
@@ -263,6 +276,20 @@ export default {
       };
       return `${map[value]}`;
     },
+    translateUtilizationWay(value) {
+      const map = {
+        transferredTo3rdParties: 'Передано сторонним организациям, предприятиям',
+        recyclingReuse: 'Переработка, повторное использование для получения продукции',
+        incinerationWithEnergyRecovery: 'Инсинерация (сжигание) с извлечением энергии на предприятии',
+        incinerationWithOutEnergyRecovery: 'Инсинерация (сжигание) без извлечения энергии на предприятии',
+        fullNeutralizationAtCompany: 'Полное обезвреживание на предприятии',
+        partialNeutralizationAtCompany: 'Частичное обезвреживание на предприятии',
+        storageAtOwnWasteFacilities: 'Хранение на собственных объектах размещения отходов',
+        dumpingAtOwnWasteFacilities: 'Захоронение на собственных объектах размещения отходов',
+        disposalAtOwnSolidDomesticLlandfill: 'Размещение на собственном полигоне ТБО'
+      };
+      return `${map[value]}`;
+    },
     // related to range select - flatpkr
     dateRangeFilter(data, filterString) {
       let dateRange = filterString.split("to");
@@ -280,9 +307,9 @@ export default {
       // When using vue-cli2, put it in the static directory. When using vue-cli3, put it in the public directory.
       // Because when I use it, I put it in the same directory of the .vue file, and I can't read the template.
 
-    
 
-      JSZipUtils.getBinaryContent('../templates/waste_inventory.docx', function(
+
+      JSZipUtils.getBinaryContent('../templates/waste_inventory.docx', function (
         error,
         content
       ) {
@@ -297,9 +324,11 @@ export default {
         // Create and load docxtemplater instance object
         let doc = new window.docxtemplater().loadZip(zip)
         // handle undefined values in docXTemplater
-        doc.setOptions({nullGetter: function() {
-          return ""; 
-        }});
+        doc.setOptions({
+          nullGetter: function () {
+            return "";
+          }
+        });
         // Set the value of the template variable
         doc.setData({
           ..._this.records,
@@ -321,15 +350,16 @@ export default {
             stack: error.stack,
             properties: error.properties
           }
-          console.log(JSON.stringify({ error: e }))
+          console.log(JSON.stringify({
+            error: e
+          }))
           throw error
         }
 
         // Generate a zip file representing the docxtemplater object (not a real file, but a representation in memory)
         let out = doc.getZip().generate({
           type: 'blob',
-          mimeType:
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         })
         // Save the target file object as a file of the target type and name it
         saveAs(out, 'waste_inventory.docx')

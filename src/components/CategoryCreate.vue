@@ -286,6 +286,13 @@
           <span v-if="$v.limitKZT.$dirty && !$v.limitKZT.minValue"
             class="helper-text invalid">{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
         </div>
+
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">{{ 'Attach_Documents' | localize }}</label>
+          <input class="form-control" type="file" id="formFileMultiple" multiple>
+        </div>
+
+        
         <button class="btn btn-success waves-effect waves-light mb-4" type="submit">
           {{'Create'|localize}}
           <i class="material-icons right">send</i>

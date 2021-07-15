@@ -5,22 +5,16 @@
       <nav aria-label="breadcrumb">
         <div class>
           <router-link to="/history" class="breadcrumb-item ml-2">{{'Menu_History'|localize}}</router-link>
-          <a
-            @click.prevent
-            class="breadcrumb-item"
-          >{{ record.type === 'income' ? 'Income' : 'Outcome' | localize }}</a>
+          <a @click.prevent class="breadcrumb-item">{{ record.type === 'income' ? 'Income' : 'Outcome' | localize }}</a>
         </div>
       </nav>
 
       <div class="row">
         <div class="col-sm-10">
-          <div
-            class="card"
-            :class="{
+          <div class="card" :class="{
             'card-bg-light-yellow': record.type === 'outcome',
             'card-bg-light-light-blue': record.type === 'income'
-          }"
-          >
+          }">
             <div class="card-body dark-grey-text">
               <div class="vertical-table">
                 <table>
@@ -42,12 +36,17 @@
                   </tr>
                   <tr>
                     <th>{{'Is_ROP'|localize}}:</th>
-                    <td>{{record.isRop}}</td>
+                    <td>{{translateRop(record.isRop)}}</td>
                   </tr>
-                  <!-- <tr>
-                    <th>{{'ROP_Category'|localize}}:</th>
-                    <td>{{record.selectedRop.codeTNVED}} {{record.selectedRop.productType}}</td>
-                  </tr> -->
+                  <tr>
+                    <template v-if="record.isRop === true">
+                      <th>{{'ROP_Category'|localize}}:</th>
+                      <td>{{record.selectedRop.codeTNVED}} {{record.selectedRop.productType}}</td>
+                    </template>
+                    <template v-else>
+                      <td></td>
+                    </template>
+                  </tr>
                   <tr>
                     <th>{{'Description'|localize}}:</th>
                     <td>{{record.description}}</td>
@@ -64,6 +63,10 @@
                     <th>{{'Title_Utilizator' | localize}}:</th>
                     <td>{{record.utilizatorName}}</td>
                   </tr>
+                  <tr>
+                    <th>{{'Utilization_Way' | localize }}</th>
+                    <td>{{translateUtilizationWay(record.utilizationWay)}}</td>
+                  </tr>
                 </table>
               </div>
 
@@ -79,10 +82,7 @@
                 <qr-code :text="record.id" v-bind:size="116" color="#17c671" error-level="H"></qr-code>
               </div>
               <div title=".docx" class="align-center">
-                <button
-                  class="btn btn-sm btn-primary position-center mt-2"
-                  @click.prevent="exportWord"
-                >
+                <button class="btn btn-sm btn-primary position-center mt-2" @click.prevent="exportWord">
                   <span class="material-icons">cloud_download</span>
                 </button>
               </div>
@@ -99,7 +99,9 @@
 import VueQRCodeComponent from 'vue-qrcode-component'
 
 import JSZip from 'jszip'
-import { saveAs } from 'file-saver'
+import {
+  saveAs
+} from 'file-saver'
 
 export default {
   name: 'detail',
@@ -161,7 +163,7 @@ export default {
       // When using vue-cli2, put it in the static directory. When using vue-cli3, put it in the public directory.
       // Because when I use it, I put it in the same directory of the .vue file, and I can't read the template.
 
-      JSZipUtils.getBinaryContent('../templates/wtn.docx', function(
+      JSZipUtils.getBinaryContent('../templates/wtn.docx', function (
         error,
         content
       ) {
@@ -204,20 +206,43 @@ export default {
             stack: error.stack,
             properties: error.properties
           }
-          console.log(JSON.stringify({ error: e }))
+          console.log(JSON.stringify({
+            error: e
+          }))
           throw error
         }
 
         // Generate a zip file representing the docxtemplater object (not a real file, but a representation in memory)
         let out = doc.getZip().generate({
           type: 'blob',
-          mimeType:
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+          mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
         })
         // Save the target file object as a file of the target type and name it
         saveAs(out, 'wtn.docx')
       })
-    }
+    },
+
+    translateRop(value) {
+      const map = {
+        true: 'Да',
+        false: 'Нет'
+      };
+      return `${map[value]}`;
+    },
+    translateUtilizationWay(value) {
+      const map = {
+        transferredTo3rdParties: 'Передано сторонним организациям, предприятиям',
+        recyclingReuse: 'Переработка, повторное использование для получения продукции',
+        incinerationWithEnergyRecovery: 'Инсинерация (сжигание) с извлечением энергии на предприятии',
+        incinerationWithOutEnergyRecovery: 'Инсинерация (сжигание) без извлечения энергии на предприятии',
+        fullNeutralizationAtCompany: 'Полное обезвреживание на предприятии',
+        partialNeutralizationAtCompany: 'Частичное обезвреживание на предприятии',
+        storageAtOwnWasteFacilities: 'Хранение на собственных объектах размещения отходов',
+        dumpingAtOwnWasteFacilities: 'Захоронение на собственных объектах размещения отходов',
+        disposalAtOwnSolidDomesticLlandfill: 'Размещение на собственном полигоне ТБО'
+      };
+      return `${map[value]}`;
+    },
   },
   computed: {
     companyInfo() {

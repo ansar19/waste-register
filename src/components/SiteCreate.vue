@@ -1,5 +1,5 @@
 <template>
-  <div class="col s12 m6">
+  <div class="col sm-12 md-6">
     <div>
       <div class="page-subtitle">
         <h4>{{'Create'|localize}}</h4>
@@ -7,20 +7,26 @@
 
       <form @submit.prevent="submitHandler">
         <div class="from-group">
-          <label for="name1">{{'Title_Site'|localize}}</label>
-          <input id="name1" type="text" v-model="siteName" :class="{invalid: $v.siteName.$dirty && !$v.siteName.required}" class="form-control">
+          <label for="name1">{{ 'Title_Site' | localize }}</label>
+          <input id="name1" type="text" v-model="siteName"
+            :class="{invalid: $v.siteName.$dirty && !$v.siteName.required}" class="form-control">
           <span v-if="$v.siteName.$dirty && !$v.siteName.required"
             class="helper-text invalid">{{'Message_SiteTitle'|localize}}</span>
         </div>
 
         <div class="form-group">
-          <label for="site-comments1">{{'Site_Comments'|localize}}</label>
-          <textarea id="site-comments1" type="textarea" v-model="siteComments"
-            class="form-control">
+          <label for="site-comments1">{{ 'Site_Comments' | localize }}</label>
+          <textarea id="site-comments1" type="textarea" v-model="siteComments" class="form-control">
           </textarea>
         </div>
 
-        <button class="btn btn-success waves-effect waves-light" type="submit">
+        <!-- Прикрепление документов к данной записи -->
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">{{ 'Attach_Documents' | localize }}</label>
+          <input class="form-control" type="file" id="formFileMultiple" multiple>
+        </div>
+
+        <button class="btn btn-success" type="submit">
           {{'Create'|localize}}
           <i class="material-icons right">send</i>
         </button>
