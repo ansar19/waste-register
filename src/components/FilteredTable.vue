@@ -134,7 +134,12 @@ export default {
           label: 'РОП?',
           field: 'isRop',
           formatFn: this.translateRop,
-          sortable: true
+          filterOptions: {
+            enabled: true,
+            filterDropdownItems: ['true', 'false'],
+            placeholder: 'Выберите тип'
+          },
+          sortable: false
         },
         {
           label: 'Тип',
@@ -154,6 +159,7 @@ export default {
       ],
       paginationOptions: {
         enabled: true,
+        initialSortBy: { field: 'date', type: 'asc' },
         mode: 'records',
         perPage: 5,
         position: 'bottom',
