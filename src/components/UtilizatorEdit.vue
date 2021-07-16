@@ -14,27 +14,34 @@
         </div>
 
         <div class="form-group">
-          <label for="name">{{'Title_Utilizator'|localize}}</label>
-          <input id="name" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}"
+          <label for="name-edit">{{'Title_Utilizator'|localize}}</label>
+          <input id="name-edit" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}"
             class="form-control">
           <span v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid">{{'Message_Utilizator_Title'|localize}}</span>
         </div>
 
         <div class="from-group">
-          <label for="phone">{{'Phone_Utilizator'|localize}}</label>
-          <input id="phone" type="text" v-model="utilizatorPhone" :class="{invalid: $v.title.$dirty && !$v.title.required}" class="form-control">
+          <label for="phone-edit">{{'Phone_Utilizator'|localize}}</label>
+          <input id="phone-edit" type="text" v-model="utilizatorPhone"
+            :class="{invalid: $v.title.$dirty && !$v.title.required}" class="form-control">
           <span v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid">{{'Message_Phone_Utilizator'|localize}}</span>
         </div>
 
         <div class="form-group">
-          <label for="utilizator-bank-details">{{'Utilizator_Bank_Detail'|localize}}</label>
-          <textarea id="utilizator-bank-details" type="textarea" v-model="utilizatorBankDetail"
+          <label for="utilizator-bank-details-edit">{{'Utilizator_Bank_Detail'|localize}}</label>
+          <textarea id="utilizator-bank-details-edit" type="textarea" v-model="utilizatorBankDetail"
             class="form-control">
           </textarea>
         </div>
 
+        <div class="form-group">
+          <label>{{'Select_Disposal_Site_Type'|localize}}</label>
+          <v-select :options="disposalSiteTypeOptions" v-model="selectedDisposalSiteType" :searchable="false"
+            label="disposalSiteTypeName" />
+          <!-- <span>Выбрано: {{ selectedDisposalSiteType }}</span> -->
+        </div>
 
         <button class="btn btn-success waves-effect waves-light" type="submit">
           {{'Update'|localize}}
@@ -46,7 +53,18 @@
 </template>
 
 <script>
-import { required, minValue } from 'vuelidate/lib/validators'
+const disposalSiteTypeOptions = [{
+    disposalSiteType: 'temporary',
+    disposalSiteTypeName: 'Временное',
+  },
+  {
+    disposalSiteType: 'permanent',
+    disposalSiteTypeName: 'Постоянное',
+  }
+];
+import {
+  required
+} from 'vuelidate/lib/validators'
 import localizeFilter from '@/filters/localize.filter'
 export default {
   props: {
@@ -60,26 +78,47 @@ export default {
     title: '',
     utilizatorPhone: '',
     utilizatorBankDetail: '',
-    current: null
+    current: null,
+    selectedDisposalSiteType: {},
   }),
   validations: {
-    title: { required },
-    utilizatorPhone : { required }
+    title: {
+      required
+    },
+    utilizatorPhone: {
+      required
+    }
   },
   watch: {
     current(utilId) {
-      const { title, utilizatorPhone, utilizatorBankDetail } = this.utilizators.find(u => u.id === utilId)
+      const {
+        title,
+        utilizatorPhone,
+        utilizatorBankDetail,
+        selectedDisposalSiteType
+      } = this.utilizators.find(u => u.id === utilId)
       this.title = title,
-      this.utilizatorPhone = utilizatorPhone,
-      this.utilizatorBankDetail = utilizatorBankDetail
-    }
+        this.utilizatorPhone = utilizatorPhone,
+        this.utilizatorBankDetail = utilizatorBankDetail,
+        this.selectedDisposalSiteType = selectedDisposalSiteType
+    },
   },
   created() {
-    const { id, title, utilizatorPhone, utilizatorBankDetail } = this.utilizators[0]
+    const {
+      id,
+      title,
+      utilizatorPhone,
+      utilizatorBankDetail,
+      selectedDisposalSiteType
+    } = this.utilizators[0]
     this.current = id
     this.title = title
     this.utilizatorPhone = utilizatorPhone,
-    this.utilizatorBankDetail
+      this.utilizatorBankDetail = utilizatorBankDetail
+    this.selectedDisposalSiteType = selectedDisposalSiteType
+  },
+  computed: {
+    disposalSiteTypeOptions: () => disposalSiteTypeOptions,
   },
   methods: {
     async submitHandler() {
@@ -87,23 +126,23 @@ export default {
         this.$v.$touch()
         return
       }
-
       try {
         const utilizatorData = {
           id: this.current,
           title: this.title,
           utilizatorPhone: this.utilizatorPhone,
-          utilizatorBankDetail: this.utilizatorBankDetail
+          utilizatorBankDetail: this.utilizatorBankDetail,
+          selectedDisposalSiteType: this.selectedDisposalSiteType
         }
         await this.$store.dispatch('updateUtilizator', utilizatorData)
         this.$message(localizeFilter('Utilizator_HasBeenUpdated'))
         this.$emit('updated', utilizatorData)
       } catch (e) {}
-    }
+    },
   },
   mounted() {
-    this.select3 = M.FormSelect.init(this.$refs.select3)
-    M.updateTextFields()
+    this.select3 = M.FormSelect.init(this.$refs.select3);
+    M.updateTextFields();
   },
   destroyed() {
     if (this.select3 && this.select3.destroy) {

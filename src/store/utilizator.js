@@ -41,6 +41,7 @@ export default {
       title,
       utilizatorPhone,
       utilizatorBankDetail,
+      selectedDisposalSiteType,
       id
     }) {
       try {
@@ -48,7 +49,8 @@ export default {
         await firebase.database().ref(`/users/${uid}/utilizators`).child(id).update({
           title,
           utilizatorPhone,
-          utilizatorBankDetail
+          utilizatorBankDetail,
+          selectedDisposalSiteType
         })
       } catch (e) {
         commit('setError', e)
@@ -61,19 +63,22 @@ export default {
     }, {
       title,
       utilizatorPhone,
-      utilizatorBankDetail
+      utilizatorBankDetail,
+      selectedDisposalSiteType
     }) {
       try {
         const uid = await dispatch('getUid')
         const utilizator = await firebase.database().ref(`/users/${uid}/utilizators`).push({
           title,
           utilizatorPhone,
-          utilizatorBankDetail
+          utilizatorBankDetail,
+          selectedDisposalSiteType
         })
         return {
           title,
           utilizatorPhone,
           utilizatorBankDetail,
+          selectedDisposalSiteType,
           id: utilizator.key
         }
       } catch (e) {

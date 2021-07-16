@@ -1,6 +1,6 @@
 <template>
   <div class="meta-table">
-    <vue-good-table :columns="columns" :rows="records"
+    <vue-good-table :columns="columns" :rows="records" v-if="records && records.length"
       :search-options="{ enabled: true, placeholder: 'Введите текст для поиска' }"
       :pagination-options="paginationOptions">
       <div slot="emptystate">No data yet</div>
@@ -120,6 +120,11 @@ export default {
           sortable: true
         },
         {
+          label: 'Тип места утилизации',
+          field: 'utilizatorName.selectedDisposalSiteType.disposalSiteTypeName',
+          sortable: true
+        },
+        {
           label: 'Способ утилизации',
           field: 'utilizationWay',
           formatFn: this.translateUtilizationWay,
@@ -159,7 +164,10 @@ export default {
       ],
       paginationOptions: {
         enabled: true,
-        initialSortBy: { field: 'date', type: 'asc' },
+        initialSortBy: {
+          field: 'date',
+          type: 'asc'
+        },
         mode: 'records',
         perPage: 5,
         position: 'bottom',
@@ -312,9 +320,6 @@ export default {
       // template file is recommended to be placed under the static directory file.
       // When using vue-cli2, put it in the static directory. When using vue-cli3, put it in the public directory.
       // Because when I use it, I put it in the same directory of the .vue file, and I can't read the template.
-
-
-
       JSZipUtils.getBinaryContent('../templates/waste_inventory.docx', function (
         error,
         content

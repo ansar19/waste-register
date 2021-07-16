@@ -8,23 +8,31 @@
       <form @submit.prevent="submitHandler">
         <div class="from-group">
           <label for="name">{{'Title_Utilizator'|localize}}</label>
-          <input id="name" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}" class="form-control">
+          <input id="name" type="text" v-model="title" :class="{invalid: $v.title.$dirty && !$v.title.required}"
+            class="form-control">
           <span v-if="$v.title.$dirty && !$v.title.required"
             class="helper-text invalid">{{'Message_Utilizator_Title'|localize}}</span>
         </div>
 
         <div class="from-group">
           <label for="phone">{{'Phone_Utilizator'|localize}}</label>
-          <input id="phone" type="text" v-model="utilizatorPhone" :class="{invalid: $v.utilizatorPhone.$dirty && !$v.utilizatorPhone.required}" class="form-control">
+          <input id="phone" type="text" v-model="utilizatorPhone"
+            :class="{invalid: $v.utilizatorPhone.$dirty && !$v.utilizatorPhone.required}" class="form-control">
           <span v-if="$v.utilizatorPhone.$dirty && !$v.utilizatorPhone.required"
             class="helper-text invalid">{{'Message_Phone_Utilizator'|localize}}</span>
         </div>
 
         <div class="form-group">
           <label for="utilizator-bank-details">{{'Utilizator_Bank_Detail'|localize}}</label>
-          <textarea id="utilizator-bank-details" type="textarea" v-model="utilizatorBankDetail"
-            class="form-control">
+          <textarea id="utilizator-bank-details" type="textarea" v-model="utilizatorBankDetail" class="form-control">
           </textarea>
+        </div>
+
+        <div class="form-group">
+          <label>{{'Select_Disposal_Site_Type'|localize}}</label>
+          <v-select :options="disposalSiteTypeOptions" v-model="selectedDisposalSiteType" :searchable="false"
+            label="disposalSiteTypeName" />
+          <!-- <span>Выбрано: {{ selectedDisposalSiteType }}</span> -->
         </div>
 
         <div class="mb-3">
@@ -42,21 +50,38 @@
 </template>
 
 <script>
-import { required, minValue } from 'vuelidate/lib/validators'
+import {
+  required
+} from 'vuelidate/lib/validators'
 import localizeFilter from '@/filters/localize.filter'
+import 'vue-select/dist/vue-select.css';
 
 export default {
   data: () => ({
     title: '',
     utilizatorPhone: '',
-    utilizatorBankDetail: ''
+    utilizatorBankDetail: '',
+    disposalSiteTypeOptions: [{
+        disposalSiteType: 'temporary',
+        disposalSiteTypeName: 'Временное',
+      },
+      {
+        disposalSiteType: 'permanent',
+        disposalSiteTypeName: 'Постоянное',
+      }
+    ],
+    selectedDisposalSiteType: {}
   }),
   validations: {
-    title: { required },
-    utilizatorPhone: { required }
+    title: {
+      required
+    },
+    utilizatorPhone: {
+      required
+    }
   },
   mounted() {
-    M.updateTextFields()
+    M.updateTextFields();
   },
   methods: {
     async submitHandler() {
@@ -69,11 +94,13 @@ export default {
         const utilizator = await this.$store.dispatch('createUtilizator', {
           title: this.title,
           utilizatorPhone: this.utilizatorPhone,
-          utilizatorBankDetail: this.utilizatorBankDetail
+          utilizatorBankDetail: this.utilizatorBankDetail,
+          selectedDisposalSiteType: this.selectedDisposalSiteType
         })
         this.title = ''
         this.utilizatorPhone = ''
         this.utilizatorBankDetail = ''
+        this.selectedDisposalSiteType = {}
         this.$v.$reset()
         this.$message(localizeFilter('Utilizator_HasBeenCreated'))
         this.$emit('created', utilizator)
