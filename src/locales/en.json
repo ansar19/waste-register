@@ -202,5 +202,7 @@
   "ROP_Category": "ROP Category",
   "Attach_Documents": "Attach Documents",
   "Utilization_Way": "Utilization Way",
-  "Select_Disposal_Site_Type": "Select Disposal Site Type"
+  "Select_Disposal_Site_Type": "Select Disposal Site Type",
+  "BIN_Utilizator": "Utilizator BIN",
+  "Message_Bin_Utilizator": "Enter the BIN of the disposal site"
 }

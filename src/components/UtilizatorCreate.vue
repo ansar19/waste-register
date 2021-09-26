@@ -15,6 +15,14 @@
         </div>
 
         <div class="from-group">
+          <label for="bin">{{'BIN_Utilizator'|localize}}</label>
+          <input id="bin" type="text" v-model="utilizatorBin"
+            :class="{invalid: $v.utilizatorBin.$dirty && !$v.utilizatorBin.required}" class="form-control">
+          <span v-if="$v.utilizatorBin.$dirty && !$v.utilizatorBin.required"
+            class="helper-text invalid">{{'Message_Bin_Utilizator'|localize}}</span>
+        </div>
+
+        <div class="from-group">
           <label for="phone">{{'Phone_Utilizator'|localize}}</label>
           <input id="phone" type="text" v-model="utilizatorPhone"
             :class="{invalid: $v.utilizatorPhone.$dirty && !$v.utilizatorPhone.required}" class="form-control">
@@ -60,6 +68,7 @@ export default {
   data: () => ({
     title: '',
     utilizatorPhone: '',
+    utilizatorBin: '',
     utilizatorBankDetail: '',
     disposalSiteTypeOptions: [{
         disposalSiteType: 'temporary',
@@ -78,6 +87,9 @@ export default {
     },
     utilizatorPhone: {
       required
+    },
+    utilizatorBin: {
+      required
     }
   },
   mounted() {
@@ -94,11 +106,13 @@ export default {
         const utilizator = await this.$store.dispatch('createUtilizator', {
           title: this.title,
           utilizatorPhone: this.utilizatorPhone,
+          utilizatorBin: this.utilizatorBin,
           utilizatorBankDetail: this.utilizatorBankDetail,
           selectedDisposalSiteType: this.selectedDisposalSiteType
         })
         this.title = ''
         this.utilizatorPhone = ''
+        this.utilizatorBin = ''
         this.utilizatorBankDetail = ''
         this.selectedDisposalSiteType = {}
         this.$v.$reset()

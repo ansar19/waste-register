@@ -200,5 +200,7 @@
   "ROP_Category": "Өнімнің атауы (тауар)",
   "Attach_Documents": "Құжаттарды жүктеңіз",
   "Utilization_Way": "Жою әдісі",
-  "Select_Disposal_Site_Type": "Қалдықтарды кәдеге жарату орны объектісінің түрі"
+  "Select_Disposal_Site_Type": "Қалдықтарды кәдеге жарату орны объектісінің түрі",
+  "BIN_Utilizator": "Қоқыс тастайтын жердің БИНі",
+  "Message_Bin_Utilizator": "Қоқыс тастайтын жердің БИНін толтырыңыз"
 }
