@@ -124,6 +124,11 @@ export default {
       record.categoryId
     )
 
+    const site = await this.$store.dispatch(
+      'fetchSiteById',
+      record.siteId
+    )
+
     const transporter = await this.$store.dispatch(
       'fetchTransporterById',
       record.transporterId
@@ -147,6 +152,7 @@ export default {
       precaution: category.precaution,
       transportationRequirements: category.transportationRequirements,
       emergency: category.emergency,
+      siteName: site.siteName,
       transporterName: transporter.title,
       utilizatorName: utilizator.title
     }

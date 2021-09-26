@@ -347,7 +347,8 @@ export default {
           companyName: _this.companyName,
           companyType: _this.companyType.nameRu,
           companyBin: _this.companyBin,
-          companyHead: _this.companyHead
+          companyHead: _this.companyHead,
+          siteName: _this.siteName
         })
 
         try {
