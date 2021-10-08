@@ -359,8 +359,7 @@ export default {
 // Header Menu
 
 .header {
-  padding: 0.5rem 2rem 2rem 2rem;
-
+  padding: 0.1rem 2rem 2rem 2rem;
   &__nav {
     position: relative;
     background-color: transparent;
@@ -420,8 +419,8 @@ export default {
     margin-bottom: 0.2rem;
     // border-radius: 0 50px 50px 0;
     &:hover {
-      color: #17bf63;
-      background-color: rgba(79, 192, 141, 0.1);
+      // color: #17bf63;
+      // background-color: rgba(79, 192, 141, 0.1);
     }
   }
   &-svg {

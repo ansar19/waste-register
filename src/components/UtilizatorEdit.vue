@@ -22,6 +22,14 @@
         </div>
 
         <div class="from-group">
+          <label for="bin-edit">{{'BIN_Utilizator'|localize}}</label>
+          <input id="bin-edit" type="text" v-model="utilizatorBin"
+            :class="{invalid: $v.utilizatorBin.$dirty && !$v.utilizatorBin.required}" class="form-control">
+          <span v-if="$v.utilizatorBin.$dirty && !$v.utilizatorBin.required"
+            class="helper-text invalid">{{'Message_Bin_Utilizator'|localize}}</span>
+        </div>
+
+        <div class="from-group">
           <label for="phone-edit">{{'Phone_Utilizator'|localize}}</label>
           <input id="phone-edit" type="text" v-model="utilizatorPhone"
             :class="{invalid: $v.title.$dirty && !$v.title.required}" class="form-control">
@@ -76,6 +84,7 @@ export default {
   data: () => ({
     select3: null,
     title: '',
+    utilizatorBin: '',
     utilizatorPhone: '',
     utilizatorBankDetail: '',
     current: null,
@@ -87,18 +96,23 @@ export default {
     },
     utilizatorPhone: {
       required
+    },
+    utilizatorBin: {
+      required
     }
   },
   watch: {
     current(utilId) {
       const {
         title,
+        utilizatorBin,
         utilizatorPhone,
         utilizatorBankDetail,
         selectedDisposalSiteType
       } = this.utilizators.find(u => u.id === utilId)
       this.title = title,
         this.utilizatorPhone = utilizatorPhone,
+        this.utilizatorBin = utilizatorBin,
         this.utilizatorBankDetail = utilizatorBankDetail,
         this.selectedDisposalSiteType = selectedDisposalSiteType
     },
@@ -107,14 +121,16 @@ export default {
     const {
       id,
       title,
+      utilizatorBin,
       utilizatorPhone,
       utilizatorBankDetail,
       selectedDisposalSiteType
     } = this.utilizators[0]
     this.current = id
     this.title = title
+    this.utilizatorBin = utilizatorBin
     this.utilizatorPhone = utilizatorPhone,
-      this.utilizatorBankDetail = utilizatorBankDetail
+    this.utilizatorBankDetail = utilizatorBankDetail
     this.selectedDisposalSiteType = selectedDisposalSiteType
   },
   computed: {
@@ -130,6 +146,7 @@ export default {
         const utilizatorData = {
           id: this.current,
           title: this.title,
+          utilizatorBin: this.utilizatorBin,
           utilizatorPhone: this.utilizatorPhone,
           utilizatorBankDetail: this.utilizatorBankDetail,
           selectedDisposalSiteType: this.selectedDisposalSiteType

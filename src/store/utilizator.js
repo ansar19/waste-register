@@ -39,6 +39,7 @@ export default {
       dispatch
     }, {
       title,
+      utilizatorBin,
       utilizatorPhone,
       utilizatorBankDetail,
       selectedDisposalSiteType,
@@ -48,6 +49,7 @@ export default {
         const uid = await dispatch('getUid')
         await firebase.database().ref(`/users/${uid}/utilizators`).child(id).update({
           title,
+          utilizatorBin,
           utilizatorPhone,
           utilizatorBankDetail,
           selectedDisposalSiteType
@@ -62,6 +64,7 @@ export default {
       dispatch
     }, {
       title,
+      utilizatorBin,
       utilizatorPhone,
       utilizatorBankDetail,
       selectedDisposalSiteType
@@ -70,12 +73,14 @@ export default {
         const uid = await dispatch('getUid')
         const utilizator = await firebase.database().ref(`/users/${uid}/utilizators`).push({
           title,
+          utilizatorBin,
           utilizatorPhone,
           utilizatorBankDetail,
           selectedDisposalSiteType
         })
         return {
           title,
+          utilizatorBin,
           utilizatorPhone,
           utilizatorBankDetail,
           selectedDisposalSiteType,

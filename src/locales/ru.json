@@ -200,5 +200,7 @@
   "ROP_Category": "Наименование продукции (товара)",
   "Attach_Documents": "Загрузите документы",
   "Utilization_Way": "Cпособ утилизации",
-  "Select_Disposal_Site_Type": "Тип объекта места утилизации отходов"
+  "Select_Disposal_Site_Type": "Тип объекта места утилизации отходов",
+  "BIN_Utilizator": "БИН места утилизации",
+  "Message_Bin_Utilizator": "Введите БИН места утилизации"
 }
